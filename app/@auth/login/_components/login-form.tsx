@@ -10,6 +10,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { FormInput } from "@/components/forms/form-input";
 import { FormPasswordInput } from "@/components/forms/form-password-input";
 import { createTypedFormField } from "@/components/hocs/create-typed-form-field";
+import { alert } from "@/components/hooks/use-alert";
 import { Form } from "@/components/ui/form";
 import SubmitButton from "@/components/ui/submit-button";
 import {
@@ -35,6 +36,9 @@ export default function LoginForm() {
 
   const onSubmit = useCallback<SubmitHandler<LoginSchemaType>>(
     async ({ email, password }) => {
+      const loadingAlert = alert.loading({
+        description: "Please wait while we log you in",
+      });
       try {
         const idToken = await signInWithEmailAndPassword(email, password);
 
@@ -53,6 +57,8 @@ export default function LoginForm() {
         router.push("/");
       } catch (error: any) {
         console.log(error?.message);
+      } finally {
+        loadingAlert.dismiss();
       }
     },
     [],

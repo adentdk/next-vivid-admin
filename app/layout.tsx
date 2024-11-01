@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 
 import { FirebaseAuthListener } from "@/components/firebase-auth-listener";
+import { Alerter } from "@/components/ui/alerter";
 import { getSession } from "@/lib/session/cookie";
 
 import "./globals.css";
@@ -11,12 +12,12 @@ import "./globals.css";
 import { SessionStoreProvider } from "./_stores/session-store-provider";
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+  src: "./_fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+  src: "./_fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 });
@@ -45,6 +46,8 @@ export default async function RootLayout({
 
           {sessionIdToken === null ? auth : children}
         </SessionStoreProvider>
+
+        <Alerter />
       </body>
     </html>
   );
