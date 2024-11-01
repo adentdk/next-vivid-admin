@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+
+import { FirebaseAuthListener } from "@/components/firebase-auth-listener";
+
 import "./globals.css";
 
 const geistSans = localFont({
@@ -20,15 +23,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  auth,
 }: Readonly<{
   children: React.ReactNode;
+  auth: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <FirebaseAuthListener />
         {children}
+        {auth}
       </body>
     </html>
   );
