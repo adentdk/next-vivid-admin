@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,13 +12,19 @@ import { FormPasswordInput } from "@/components/forms/form-password-input";
 import { createTypedFormField } from "@/components/hocs/create-typed-form-field";
 import { Form } from "@/components/ui/form";
 import SubmitButton from "@/components/ui/submit-button";
-import { signInWithEmailAndPassword } from "@/lib/firebase/auth";
+import {
+  signInWithCustomToken,
+  signInWithEmailAndPassword,
+} from "@/lib/firebase/auth";
 
 import { loginSchema, LoginSchemaType } from "../_schemas/login-schema";
+import { createSessionAction, getCustomTokenAction } from "../actions";
 
 const TypedFormField = createTypedFormField<LoginSchemaType>();
 
 export default function LoginForm() {
+  const router = useRouter();
+
   const formMethods = useForm({
     resolver: yupResolver(loginSchema),
     defaultValues: {
@@ -29,7 +37,20 @@ export default function LoginForm() {
     async ({ email, password }) => {
       try {
         const idToken = await signInWithEmailAndPassword(email, password);
-        console.log(idToken);
+
+        const customTokenResult = await getCustomTokenAction(idToken);
+        if (!customTokenResult.success) {
+          throw new Error(
+            customTokenResult.errorMessage ?? customTokenResult.message,
+          );
+        }
+        const newIdToken = await signInWithCustomToken(
+          customTokenResult.data.customToken,
+        );
+
+        await createSessionAction(newIdToken);
+
+        router.push("/");
       } catch (error: any) {
         console.log(error?.message);
       }
@@ -62,9 +83,7 @@ export default function LoginForm() {
           )}
         />
 
-        <SubmitButton variant="secondary" className="w-full">
-          Kirim
-        </SubmitButton>
+        <SubmitButton className="w-full">Kirim</SubmitButton>
       </form>
     </Form>
   );

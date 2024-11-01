@@ -2,24 +2,39 @@
 
 import { Fragment, useLayoutEffect } from "react";
 
-import { onAuthStateChanged } from "@/lib/firebase/auth";
+import { useSessionContext } from "@/app/_stores/session-store-provider";
+import { onAuthStateChanged, onIdTokenChanged } from "@/lib/firebase/auth";
 import { FetchApi } from "@/lib/utils/fetch-api";
 
 export function FirebaseAuthListener() {
+  const setSessionState = useSessionContext().getState().set;
+
   useLayoutEffect(() => {
-    const unsubscribe = onAuthStateChanged((user) => {
+    const unsubscribe = onIdTokenChanged(async (user) => {
       if (user) {
         const api = new FetchApi();
 
-        api.fetch({
+        await api.fetch({
           method: "POST",
-          url: "/api/auth",
-          body: user?.toJSON(),
+          url: "/api/session",
+          body: { idToken: user.accessToken },
         });
       }
     });
 
     return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useLayoutEffect(() => {
+    const unsubscribe = onAuthStateChanged(async (user) => {
+      if (user) {
+        setSessionState({ user: user.toJSON() as any });
+      }
+    });
+
+    return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <Fragment></Fragment>;

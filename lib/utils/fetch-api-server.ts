@@ -1,10 +1,13 @@
-"use server";
+import "server-only";
 
 import { FetchApi } from "./fetch-api";
 
+const { BASE_API_URL = "http://localhost:3001", X_API_KEY = "api-key" } =
+  process.env;
+
 export class FetchApiServer extends FetchApi {
   constructor() {
-    super(process.env.BASE_API_URL as string);
+    super(BASE_API_URL);
   }
 
   protected getHeaders(
@@ -12,7 +15,7 @@ export class FetchApiServer extends FetchApi {
   ): Record<string, any> {
     return {
       ...super.getHeaders(customHeaders),
-      "x-api-key": process.env.X_API_KEY,
+      "x-api-key": X_API_KEY,
     };
   }
 }

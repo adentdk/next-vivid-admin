@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   type NextOrObserver,
   onAuthStateChanged as _onAuthStateChanged,
+  onIdTokenChanged as _onIdTokenChanged,
   signInWithCustomToken as _signInWithCustomToken,
   signInWithEmailAndPassword as _signInWithEmailAndPassword,
   signInWithPopup,
@@ -32,10 +33,22 @@ export async function signInWithEmailAndPassword(
   return credential.user.getIdToken(true);
 }
 
-export async function signInWithCustomTokenProvider(customToken: string) {
-  return _signInWithCustomToken(auth, customToken);
+export async function signInWithCustomToken(customToken: string) {
+  const credential = await _signInWithCustomToken(auth, customToken);
+
+  return credential.user.getIdToken(true);
 }
 
 export function onAuthStateChanged(cb: NextOrObserver<User>) {
   return _onAuthStateChanged(auth, cb);
+}
+
+export function onIdTokenChanged(
+  cb: NextOrObserver<
+    User & {
+      accessToken: string;
+    }
+  >,
+) {
+  return _onIdTokenChanged(auth, cb as any);
 }

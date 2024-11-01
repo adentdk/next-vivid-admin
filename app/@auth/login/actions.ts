@@ -1,5 +1,9 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
+
+import { createSession } from "@/lib/session/cookie";
 import { FetchApiServer } from "@/lib/utils/fetch-api-server";
 
 export async function getCustomTokenAction(idToken: string) {
@@ -13,5 +17,13 @@ export async function getCustomTokenAction(idToken: string) {
     body: { idToken },
   });
 
+  if (customTokenResult.success) {
+    revalidatePath("/", "layout");
+  }
+
   return customTokenResult.toJson();
+}
+
+export async function createSessionAction(idToken: string) {
+  await createSession(cookies(), idToken);
 }
