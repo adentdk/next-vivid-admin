@@ -21,13 +21,13 @@ import { MenuGroupMap } from "../_const/menu";
 export const columns: ColumnDef<MenuType>[] = [
   {
     size: 4,
-    accessorKey: "id",
+    accessorKey: "_id",
     header: "ID",
   },
   {
     size: 4,
     accessorKey: "name",
-    header: "Nama",
+    header: "Name",
   },
   {
     size: 4,
@@ -40,7 +40,7 @@ export const columns: ColumnDef<MenuType>[] = [
   {
     size: 2,
     accessorKey: "_count.children",
-    header: "Jumlah sub menu",
+    header: "Children Count",
     cell: ({ row }) => {
       return (
         <ButtonLink href={`/engine/menu?parentMenuId=${row.original._id}`}>
@@ -54,7 +54,7 @@ export const columns: ColumnDef<MenuType>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      return row.getValue("status") ? "Aktif" : "Tidak Aktif";
+      return row.getValue("status") ? "Active" : "Inactive";
     },
   },
   {
@@ -73,10 +73,10 @@ export const columns: ColumnDef<MenuType>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
-              <Link href={`/engine/menu/${menu._id}/update`}>Update</Link>
+              <Link href={`/menus/${menu._id}/update`}>Update</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
-              <Link href={`/engine/menu/${menu._id}/delete`}>Delete</Link>
+              <Link href={`/menus/${menu._id}/delete`}>Delete</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

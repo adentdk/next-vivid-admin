@@ -1,4 +1,4 @@
-import PageHeader from "@/components/commons/page-header";
+import { PageHeader } from "@/components/page-header";
 
 import CreateMenuForm from "../_components/create-menu-form";
 
@@ -13,7 +13,7 @@ export default function Page() {
           { title: "List of Menus", href: "/engine/menu" },
           {
             title: "Create a new Menu",
-            href: "/engine/menu/create",
+            href: "/engine/menus/create",
             disabled: true,
           },
         ]}

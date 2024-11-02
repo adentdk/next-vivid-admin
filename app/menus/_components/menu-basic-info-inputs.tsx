@@ -4,16 +4,13 @@ import { Fragment, useEffect } from "react";
 
 import { useFormContext, useWatch } from "react-hook-form";
 
+import { FormInput } from "@/components/forms/form-input";
+import { FormRadioGroupMap } from "@/components/forms/form-radio-group-map";
+import { createTypedFormField } from "@/components/hocs/create-typed-form-field";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { FormInput } from "@/components/ui/input";
-import { FormRadioGroupMap } from "@/components/ui/radio-group";
-import { FormTextarea } from "@/components/ui/textarea";
-import { createTypedFormField } from "@/components/utils/create-typed-form-field";
-import { MenuLinkTargetEnum, MenuLinkTypeEnum } from "@/libs/types/enum";
+import { MenuLinkTargetEnum, MenuLinkTypeEnum } from "@/lib/types";
 
 import { CreateMenuSchemaType } from "../_schemas/create-menu-schema";
-
-import { FormSelectParentInput } from "./select-parent-input";
 
 const FormField = createTypedFormField<CreateMenuSchemaType>();
 
@@ -32,17 +29,6 @@ export default function MenuBasicInfoInputs() {
               mandatory
               placeholder="Enter menu name"
               {...field}
-            />
-          )}
-        />
-
-        <FormField
-          name="description"
-          render={({ field: { value, onChange } }) => (
-            <FormTextarea
-              label="Description"
-              value={value}
-              onChange={onChange}
             />
           )}
         />
@@ -70,7 +56,7 @@ export default function MenuBasicInfoInputs() {
           )}
         />
 
-        <FormField
+        {/* <FormField
           name="parentId"
           render={({ field: { value, onChange } }) => (
             <FormSelectParentInput
@@ -80,7 +66,7 @@ export default function MenuBasicInfoInputs() {
               onValueChange={(v) => onChange(parseInt(v, 10))}
             />
           )}
-        />
+        /> */}
       </CardContent>
     </Card>
   );

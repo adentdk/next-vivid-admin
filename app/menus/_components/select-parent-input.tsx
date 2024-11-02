@@ -2,9 +2,8 @@
 
 import { forwardRef, useMemo } from "react";
 
+import withFormItemWrapper from "@/components/hocs/with-form-item-wrapper";
 import { SelectMap, SelectMapItem } from "@/components/ui/select";
-import withFormItemWrapper from "@/components/utils/with-form-item-wrapper";
-import { MenuWithChildren } from "@/libs/prisma/types/extends";
 
 import { useGetAllMenusRecursive } from "../_hooks/use-all-menus";
 
@@ -21,7 +20,7 @@ const SelectParentInput = forwardRef<
   const items = useMemo<SelectMapItem[]>(() => {
     if (!menus.data) return [];
 
-    const mapMenuToSelectItem = (menu: MenuWithChildren): SelectMapItem => {
+    const mapMenuToSelectItem = (menu: any): SelectMapItem => {
       if (menu.children && menu.children.length > 0) {
         return {
           value: menu.id.toString(),

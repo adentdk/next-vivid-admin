@@ -5,7 +5,7 @@ import { ChevronRight, MoreHorizontal } from "lucide-react";
 
 import { cn } from "@/lib/utils/classnames";
 
-export type BreadcrumbItemType = {
+type BreadcrumbItemType = {
   title: string;
   href: string;
   disabled?: boolean;
@@ -38,6 +38,7 @@ const Breadcrumb = forwardRef<
     </nav>
   );
 });
+
 Breadcrumb.displayName = "Breadcrumb";
 
 const BreadcrumbList = forwardRef<
@@ -73,14 +74,15 @@ const BreadcrumbLink = forwardRef<
     asChild?: boolean;
     disabled?: boolean;
   }
->(({ asChild, className, disabled = false, ...props }, ref) => {
-  const Comp = asChild ? Slot : "a";
+>(({ asChild, className, disabled, ...props }, ref) => {
+  const Comp = asChild ? Slot : disabled ? "span" : "a";
 
   return (
     <Comp
       ref={ref}
-      onClick={(e) => (disabled ? e.preventDefault() : undefined)}
-      className={cn("transition-colors hover:text-foreground", className)}
+      className={cn("transition-colors hover:text-foreground", className, {
+        "cursor-default": disabled,
+      })}
       {...props}
     />
   );
@@ -106,15 +108,15 @@ const BreadcrumbSeparator = ({
   children,
   className,
   ...props
-}: React.ComponentProps<"li">) => (
-  <li
+}: React.ComponentProps<"div">) => (
+  <div
     role="presentation"
     aria-hidden="true"
-    className={cn("[&>svg]:w-3.5 [&>svg]:h-3.5", className)}
+    className={cn("[&>svg]:size-3.5", className)}
     {...props}
   >
     {children ?? <ChevronRight />}
-  </li>
+  </div>
 );
 BreadcrumbSeparator.displayName = "BreadcrumbSeparator";
 
@@ -143,3 +145,5 @@ export {
   BreadcrumbPage,
   BreadcrumbSeparator,
 };
+
+export type { BreadcrumbItemType };

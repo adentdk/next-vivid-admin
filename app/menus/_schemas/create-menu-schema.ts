@@ -4,7 +4,7 @@ import {
   MenuGroupEnum,
   MenuLinkTargetEnum,
   MenuLinkTypeEnum,
-} from "@/libs/types/enum";
+} from "@/lib/types";
 
 export const createMenuSchema = object().shape({
   name: string().required("Nama menu harus diisi"),

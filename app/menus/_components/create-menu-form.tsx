@@ -7,18 +7,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useMediaQuery } from "usehooks-ts";
 
-import FormLayout from "@/components/commons/form-layout";
+import FormLayout from "@/components/form-layout";
 import { AlertDialogAction } from "@/components/ui/alert-dialog";
 import { Form } from "@/components/ui/form";
 import SubmitButton from "@/components/ui/submit-button";
-import { useAlert } from "@/components/ui/use-alert";
-import { useToast } from "@/components/ui/use-toast";
-import { CreateMenuType } from "@/libs/prisma/queries/create-menu.query";
 import {
   MenuGroupEnum,
   MenuLinkTargetEnum,
   MenuLinkTypeEnum,
-} from "@/libs/types/enum";
+} from "@/lib/types";
 
 import { createMenuSchema } from "../_schemas/create-menu-schema";
 import { createMenuAction } from "../actions";
@@ -39,14 +36,12 @@ export default function CreateMenuForm() {
       group: MenuGroupEnum.Default,
       linkType: MenuLinkTypeEnum.Href,
       linkTarget: MenuLinkTargetEnum.CurrentTab,
+      sitemapPriority: 1,
       icon: "",
     },
   });
 
   const { handleSubmit } = formMethods;
-
-  const { alert } = useAlert();
-  const { toast } = useToast();
 
   const router = useRouter();
 
@@ -105,7 +100,9 @@ export default function CreateMenuForm() {
           });
         }
       },
-      (error) => {},
+      (error) => {
+        console.error(error);
+      },
     )();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

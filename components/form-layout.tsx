@@ -1,4 +1,4 @@
-import { cn } from "@/libs/utils/classnames";
+import { cn } from "@/lib/utils/classnames";
 
 type FormLayoutProps = {
   children: React.ReactNode;

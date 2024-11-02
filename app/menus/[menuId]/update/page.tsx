@@ -25,11 +25,11 @@ export default async function Page({
         title="Update Menu"
         canGoBack
         breadcrumbs={[
-          { title: "Home", href: "/engine" },
-          { title: "List of Menus", href: "/engine/menu" },
+          { title: "Home", href: "/" },
+          { title: "List of Menus", href: "/menu" },
           {
             title: "Update Menu",
-            href: `/engine/menu/${menu.id}/update`,
+            href: `/menus/${menu.id}/update`,
             disabled: true,
           },
         ]}

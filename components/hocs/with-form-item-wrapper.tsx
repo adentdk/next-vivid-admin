@@ -6,6 +6,7 @@ export default function withFormItemWrapper<T>(
   WrappedComponent: React.ForwardRefExoticComponent<T>,
 ) {
   return forwardRef(
+    // @ts-ignore
     (
       props: Omit<
         React.ComponentProps<typeof FormItemWrapper>,
