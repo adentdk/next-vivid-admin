@@ -19,9 +19,9 @@ export class FetchApi {
     this.baseUrl = baseUrl;
   }
 
-  protected getHeaders(
+  protected async getHeaders(
     customHeaders: Record<string, any> = {},
-  ): Record<string, any> {
+  ): Promise<Record<string, any>> {
     return {
       "Content-Type": "application/json",
       ...customHeaders,
@@ -32,17 +32,17 @@ export class FetchApi {
     return `${this.baseUrl}${url}${params ? `?${objectToQueryString(params)}` : ""}`;
   }
 
-  private createRequestConfig(
+  private async createRequestConfig(
     method: string,
     headers: Record<string, any>,
     body?: any,
     cache?: RequestInit["cache"],
     next?: NextFetchRequestConfig,
-  ): RequestInit {
+  ): Promise<RequestInit> {
     this.controller = new AbortController();
     const config: RequestInit = {
       method,
-      headers: this.getHeaders(headers),
+      headers: await this.getHeaders(headers),
       credentials: "same-origin",
       redirect: "follow",
       cache: typeof next === "undefined" ? "no-cache" : cache,
@@ -92,7 +92,7 @@ export class FetchApi {
     );
 
     try {
-      const res = await fetch(fullUrl, requestConfig);
+      const res = await fetch(fullUrl, await requestConfig);
 
       if (res.status === 204) {
         return new BaseApiResponse({

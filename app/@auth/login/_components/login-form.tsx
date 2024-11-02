@@ -52,6 +52,8 @@ export default function LoginForm() {
           customTokenResult.data.customToken,
         );
 
+        console.log(newIdToken);
+
         await createSessionAction(newIdToken);
 
         router.push("/");

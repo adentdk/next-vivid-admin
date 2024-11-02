@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
-import { useCallback } from 'react';
+import { useCallback } from "react";
 
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
-import { supportedLngs } from '~/app/i18n/settings';
-import FormLayout from '~/components/commons/form-layout';
-import { Form } from '~/components/ui/form';
-import SubmitButton from '~/components/ui/submit-button';
+import { supportedLngs } from "@/app/i18n/settings";
+import FormLayout from "@/components/commons/form-layout";
+import { Form } from "@/components/ui/form";
+import SubmitButton from "@/components/ui/submit-button";
 
-import { createNamespaceSchema } from '../_schemas/create-namespace-schema';
+import { createNamespaceSchema } from "../_schemas/create-namespace-schema";
 
 export default function CreateNamespaceForm() {
   const formMethods = useForm({
     resolver: yupResolver(createNamespaceSchema),
     defaultValues: {
-      namespace: '',
+      namespace: "",
       locales: supportedLngs.map((locale) => ({
         locale,
-        keyValues: [{ key: '', value: '' }],
+        keyValues: [{ key: "", value: "" }],
       })),
     },
   });

@@ -1,4 +1,8 @@
+import { cookies } from "next/headers";
+
 import "server-only";
+
+import { getSession } from "../session/cookie";
 
 import { FetchApi } from "./fetch-api";
 
@@ -10,12 +14,16 @@ export class FetchApiServer extends FetchApi {
     super(BASE_API_URL);
   }
 
-  protected getHeaders(
-    customHeaders: Record<string, any> = {},
-  ): Record<string, any> {
-    return {
-      ...super.getHeaders(customHeaders),
-      "x-api-key": X_API_KEY,
-    };
+  protected async getHeaders(customHeaders: Record<string, any> = {}) {
+    const headers = await super.getHeaders(customHeaders);
+    headers["x-api-key"] = X_API_KEY;
+
+    const idToken = await getSession(cookies());
+
+    if (idToken) {
+      headers["Authorization"] = `Bearer ${idToken}`;
+    }
+
+    return headers;
   }
 }

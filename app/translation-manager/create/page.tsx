@@ -1,7 +1,7 @@
-import PageHeader from '~/components/commons/page-header';
-import { ButtonLink } from '~/components/ui/button-link';
+import PageHeader from "@/components/commons/page-header";
+import { ButtonLink } from "@/components/ui/button-link";
 
-import CreateNamespaceForm from '../_components/create-namespace-form';
+import CreateNamespaceForm from "../_components/create-namespace-form";
 
 export default function Page() {
   return (
@@ -9,14 +9,14 @@ export default function Page() {
       <PageHeader
         title="Create Translation Namespace"
         breadcrumbs={[
-          { title: 'Beranda', href: '/engine' },
+          { title: "Beranda", href: "/engine" },
           {
-            title: 'List of Translation Namespaces',
-            href: '/engine/translation-manager',
+            title: "List of Translation Namespaces",
+            href: "/engine/translation-manager",
           },
           {
-            title: 'Create Translation Namespace',
-            href: '/engine/translation-manager/create',
+            title: "Create Translation Namespace",
+            href: "/engine/translation-manager/create",
             disabled: true,
           },
         ]}

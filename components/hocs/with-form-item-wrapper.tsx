@@ -10,7 +10,8 @@ export default function withFormItemWrapper<T>(
       props: Omit<
         React.ComponentProps<typeof FormItemWrapper>,
         "children" | "onChange"
-      > & T,
+      > &
+        T,
       ref: React.Ref<React.ElementType<typeof WrappedComponent>>,
     ) => {
       const {

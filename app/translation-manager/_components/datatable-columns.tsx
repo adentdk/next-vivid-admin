@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import Link from "next/link";
 
-import { I18nTranslation } from '@prisma/client';
-import { ColumnDef } from '@tanstack/react-table';
-import { MoreHorizontal } from 'lucide-react';
+import { I18nTranslation } from "@prisma/client";
+import { ColumnDef } from "@tanstack/react-table";
+import { MoreHorizontal } from "lucide-react";
 
-import { Button } from '~/components/ui/button';
-import { ButtonLink } from '~/components/ui/button-link';
+import { Button } from "@/components/ui/button";
+import { ButtonLink } from "@/components/ui/button-link";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '~/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 
-export const columns: ColumnDef<Pick<I18nTranslation, 'namespace'>>[] = [
+export const columns: ColumnDef<Pick<I18nTranslation, "namespace">>[] = [
   {
     size: 4,
-    accessorKey: 'namespace',
-    header: 'Namespace',
+    accessorKey: "namespace",
+    header: "Namespace",
     cell: ({ row }) => (
       <ButtonLink
         href={`/engine/translation-manager/${row.original.namespace}`}
@@ -31,7 +31,7 @@ export const columns: ColumnDef<Pick<I18nTranslation, 'namespace'>>[] = [
   },
   {
     size: 2,
-    id: 'actions',
+    id: "actions",
     cell: ({ row }) => {
       const translation = row.original;
       return (

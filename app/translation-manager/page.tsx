@@ -1,11 +1,9 @@
-import PageHeader from '~/components/commons/page-header';
-import { Button } from '~/components/ui/button';
-import { ButtonLink } from '~/components/ui/button-link';
-import { DataTable } from '~/components/ui/data-table';
-import { getI18nNamespacesQuery } from '~/libs/prisma/queries/get-i18n-namespaces.query';
-import { PaginationParams } from '~/libs/types/utils';
+import { PageHeader } from "@/components/page-header";
+import { ButtonLink } from "@/components/ui/button-link";
+import { DataTable } from "@/components/ui/data-table";
+import { PaginationParams } from "@/lib/types";
 
-import { columns } from './_components/datatable-columns';
+import { columns } from "./_components/datatable-columns";
 
 export default async function TranslationManagerPage(props: {
   searchParams?: PaginationParams;
@@ -21,10 +19,10 @@ export default async function TranslationManagerPage(props: {
       <PageHeader
         title="List of Translation Namespaces"
         breadcrumbs={[
-          { title: 'Beranda', href: '/engine' },
+          { title: "Beranda", href: "/engine" },
           {
-            title: 'List of Translation Namespaces',
-            href: '/engine/translation-manager',
+            title: "List of Translation Namespaces",
+            href: "/engine/translation-manager",
             disabled: true,
           },
         ]}

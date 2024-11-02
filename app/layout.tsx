@@ -5,10 +5,12 @@ import localFont from "next/font/local";
 
 import { FirebaseAuthListener } from "@/components/firebase-auth-listener";
 import { Alerter } from "@/components/ui/alerter";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { getSession } from "@/lib/session/cookie";
 
 import "./globals.css";
 
+import { AppSidebar } from "./_components/app-sidebar";
 import { SessionStoreProvider } from "./_stores/session-store-provider";
 
 const geistSans = localFont({
@@ -34,7 +36,10 @@ export default async function RootLayout({
   children: React.ReactNode;
   auth: React.ReactNode;
 }>) {
-  const sessionIdToken = await getSession(cookies());
+  const cookieStore = await cookies();
+  const defaultSidebarOpen = cookieStore.get("sidebar:state")?.value === "true";
+
+  const sessionIdToken = await getSession(cookieStore);
 
   return (
     <html lang="en">
@@ -44,7 +49,15 @@ export default async function RootLayout({
         <SessionStoreProvider initialState={{ idToken: sessionIdToken }}>
           <FirebaseAuthListener />
 
-          {sessionIdToken === null ? auth : children}
+          {sessionIdToken === null ? (
+            auth
+          ) : (
+            <SidebarProvider defaultOpen={defaultSidebarOpen}>
+              <AppSidebar />
+
+              <main className="space-y-4 my-4 px-4">{children}</main>
+            </SidebarProvider>
+          )}
         </SessionStoreProvider>
 
         <Alerter />

@@ -62,6 +62,7 @@ export async function updateSession(
 
 export async function deleteSession(
   cookies: ReadonlyRequestCookies | RequestCookies | ResponseCookies,
-): Promise<void> {
-  cookies.delete(SESSION_KEY);
+) {
+  console.log("delete cookie");
+  return cookies.delete(SESSION_KEY);
 }

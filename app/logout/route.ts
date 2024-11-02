@@ -5,6 +5,8 @@ import { deleteSession } from "@/lib/session/cookie";
 
 const handler = async (req: NextRequest) => {
   await deleteSession(cookies());
+
+  return Response.redirect(`${process.env.APP_URL}/login`);
 };
 
 export const GET = handler;

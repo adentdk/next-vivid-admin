@@ -12,7 +12,7 @@ export async function getCustomTokenAction(idToken: string) {
   const customTokenResult = await api.fetch<{
     customToken: string;
   }>({
-    url: "/v1/auth/firebase/login",
+    url: "/v1/auth/firebase-login",
     method: "POST",
     body: { idToken },
   });

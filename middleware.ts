@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { deleteSession, getSession } from "./lib/session/cookie";
+import { FetchApiServer } from "./lib/utils/fetch-api-server";
+
 const { APP_URL: baseUrl = "http://localhost:3002", SESSION_KEY = "session" } =
   process.env;
 
@@ -9,7 +12,7 @@ export default async function middleware(req: NextRequest) {
 
   const authPathnames = ["/login"];
 
-  const session = req.cookies.get(SESSION_KEY)?.value;
+  const session = await getSession(req.cookies);
 
   if (nextUrl.pathname === "/logout" && session) {
     return nextResponse;
@@ -30,6 +33,19 @@ export default async function middleware(req: NextRequest) {
   // Mencegah redirect ke halaman yang sama
   if (redirectUrl !== nextUrl.href && redirectUrl !== baseUrl) {
     nextResponse = NextResponse.redirect(redirectUrl);
+  }
+
+  if (session) {
+    const api = new FetchApiServer();
+
+    const verifyResponse = await api.fetch({ url: "/v1/auth/verify" });
+
+    if (verifyResponse.code === 401) {
+      nextResponse = NextResponse.redirect(
+        `${baseUrl}/logout?from=${nextUrl.pathname}`,
+      );
+      await deleteSession(nextResponse.cookies);
+    }
   }
 
   return nextResponse;
