@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { deleteSession, getSession } from "./lib/session/cookie";
+import { getSession } from "./lib/session/cookie";
 import { FetchApiServer } from "./lib/utils/fetch-api-server";
 
 const { APP_URL: baseUrl = "http://localhost:3002", SESSION_KEY = "session" } =
@@ -14,7 +14,7 @@ export default async function middleware(req: NextRequest) {
 
   const session = await getSession(req.cookies);
 
-  if (nextUrl.pathname === "/logout" && session) {
+  if (["/logout", "/refresh-token"].includes(nextUrl.pathname) && session) {
     return nextResponse;
   }
 
@@ -42,9 +42,8 @@ export default async function middleware(req: NextRequest) {
 
     if (verifyResponse.code === 401) {
       nextResponse = NextResponse.redirect(
-        `${baseUrl}/logout?from=${nextUrl.pathname}`,
+        `${baseUrl}/refresh-token?redirectTarget=${nextUrl.pathname}`,
       );
-      await deleteSession(nextResponse.cookies);
     }
   }
 

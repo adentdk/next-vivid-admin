@@ -39,7 +39,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   auth: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
+  const cookieStore = cookies();
   const defaultSidebarOpen = cookieStore.get("sidebar:state")?.value === "true";
 
   const sessionIdToken = await getSession(cookieStore);

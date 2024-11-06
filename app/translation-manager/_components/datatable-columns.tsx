@@ -22,9 +22,7 @@ export const columns: ColumnDef<Pick<I18nTranslation, "namespace">>[] = [
     accessorKey: "namespace",
     header: "Namespace",
     cell: ({ row }) => (
-      <ButtonLink
-        href={`/engine/translation-manager/${row.original.namespace}`}
-      >
+      <ButtonLink href={`/translation-manager/${row.original.namespace}`}>
         {row.original.namespace}
       </ButtonLink>
     ),
@@ -45,15 +43,13 @@ export const columns: ColumnDef<Pick<I18nTranslation, "namespace">>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
-              <Link
-                href={`/engine/translation-manager/${translation.namespace}/edit`}
-              >
+              <Link href={`/translation-manager/${translation.namespace}/edit`}>
                 Edit
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
               <Link
-                href={`/engine/translation-manager/${translation.namespace}/delete`}
+                href={`/translation-manager/${translation.namespace}/delete`}
               >
                 Delete
               </Link>

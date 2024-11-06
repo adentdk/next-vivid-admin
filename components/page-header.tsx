@@ -7,6 +7,7 @@ import { ChevronLeft } from "lucide-react";
 import { Breadcrumb, BreadcrumbItemType } from "@/components/ui/breadcrumb";
 
 import { Button } from "./ui/button";
+import { SidebarTrigger } from "./ui/sidebar";
 
 export function PageHeader(props: {
   title: string;
@@ -21,13 +22,13 @@ export function PageHeader(props: {
 
   return (
     <header className="space-y-4">
-      {typeof breadcrumbs !== "undefined" ? (
-        <Breadcrumb
-          className="flex justify-center sm:justify-start"
-          items={breadcrumbs ?? []}
-        />
-      ) : null}
-      <div className="flex flex-col items-center gap-4 sm:flex-row">
+      <div className="flex gap-4">
+        <SidebarTrigger />
+        {typeof breadcrumbs !== "undefined" ? (
+          <Breadcrumb className="flex" items={breadcrumbs ?? []} />
+        ) : null}
+      </div>
+      <div className="flex flex-col gap-4 sm:flex-row">
         {canGoBack ? (
           <Button variant="outline" size="icon" onClick={() => router.back()}>
             <ChevronLeft className="w-4 h-4" />

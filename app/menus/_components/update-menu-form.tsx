@@ -107,7 +107,7 @@ export default function UpdateMenuForm({
               variant: "default",
             });
 
-            router.push("/engine/menu");
+            router.push("/menus");
           } catch (error: any) {
             alert({
               title: "Failed to create menu",

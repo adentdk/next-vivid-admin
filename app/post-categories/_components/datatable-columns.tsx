@@ -14,11 +14,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MenuGroupEnum, MenuType } from "@/lib/types";
+import { PostCategoryType } from "@/lib/types";
 
-import { MenuGroupMap } from "../_const/menu";
-
-export const columns: ColumnDef<MenuType>[] = [
+export const columns: ColumnDef<PostCategoryType>[] = [
   {
     size: 4,
     accessorKey: "_id",
@@ -30,31 +28,17 @@ export const columns: ColumnDef<MenuType>[] = [
     header: "Name",
   },
   {
-    size: 4,
-    accessorKey: "group",
-    header: "Group",
-    cell({ row }) {
-      return MenuGroupMap[row.getValue("group") as MenuGroupEnum];
-    },
-  },
-  {
     size: 2,
     accessorKey: "_childrenCount",
     header: "Children Count",
     cell: ({ row }) => {
       return (
-        <ButtonLink href={`/menus?parentMenuId=${row.original._id}`}>
-          {(row.original as any)?._childrenCount ?? 0}
+        <ButtonLink
+          href={`/post-categories?parentCategoryId=${row.original._id}`}
+        >
+          {row.original._childrenCount ?? 0}
         </ButtonLink>
       );
-    },
-  },
-  {
-    size: 4,
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => {
-      return row.getValue("status") ? "Active" : "Inactive";
     },
   },
   {
@@ -73,10 +57,10 @@ export const columns: ColumnDef<MenuType>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
-              <Link href={`/menus/${menu._id}/update`}>Update</Link>
+              <Link href={`/post-categories/${menu._id}/update`}>Update</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
-              <Link href={`/menus/${menu._id}/delete`}>Delete</Link>
+              <Link href={`/post-categories/${menu._id}/delete`}>Delete</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

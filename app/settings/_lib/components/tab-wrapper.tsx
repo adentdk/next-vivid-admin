@@ -10,8 +10,8 @@ export default function TabWrapper(props: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (pathname === "/engine/setting") {
-      router.replace("/engine/setting/site");
+    if (pathname === "/setting") {
+      router.replace("/setting/site");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
@@ -21,7 +21,7 @@ export default function TabWrapper(props: { children: React.ReactNode }) {
       defaultValue="site"
       value={pathname.split("/").pop()}
       onValueChange={(v) => {
-        router.push(`/engine/setting/${v}`);
+        router.push(`/setting/${v}`);
       }}
     >
       <TabsList>

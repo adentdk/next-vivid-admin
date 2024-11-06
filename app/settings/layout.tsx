@@ -19,7 +19,7 @@ export default function Layout(props: {
         title="Pengaturan Halaman"
         breadcrumbs={[
           { title: "Beranda", href: "/engine" },
-          { title: "Pengaturan", href: "/engine/setting", disabled: true },
+          { title: "Pengaturan", href: "/setting", disabled: true },
         ]}
       />
       <TabWrapper>

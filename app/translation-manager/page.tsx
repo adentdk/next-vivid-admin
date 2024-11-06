@@ -22,15 +22,12 @@ export default async function TranslationManagerPage(props: {
           { title: "Beranda", href: "/engine" },
           {
             title: "List of Translation Namespaces",
-            href: "/engine/translation-manager",
+            href: "/translation-manager",
             disabled: true,
           },
         ]}
         actions={
-          <ButtonLink
-            variant="default"
-            href="/engine/translation-manager/create"
-          >
+          <ButtonLink variant="default" href="/translation-manager/create">
             Add Translation Namespace
           </ButtonLink>
         }

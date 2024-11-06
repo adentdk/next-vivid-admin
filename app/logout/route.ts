@@ -1,12 +1,14 @@
 import { cookies } from "next/headers";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import { deleteSession } from "@/lib/session/cookie";
 
 const handler = async (req: NextRequest) => {
-  await deleteSession(cookies());
+  const res = NextResponse.redirect(`${process.env.APP_URL}/login`);
 
-  return Response.redirect(`${process.env.APP_URL}/login`);
+  await deleteSession(res.cookies);
+
+  return res;
 };
 
 export const GET = handler;

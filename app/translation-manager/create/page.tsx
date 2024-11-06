@@ -9,19 +9,19 @@ export default function Page() {
       <PageHeader
         title="Create Translation Namespace"
         breadcrumbs={[
-          { title: "Beranda", href: "/engine" },
+          { title: "Beranda", href: "" },
           {
             title: "List of Translation Namespaces",
-            href: "/engine/translation-manager",
+            href: "/translation-manager",
           },
           {
             title: "Create Translation Namespace",
-            href: "/engine/translation-manager/create",
+            href: "/translation-manager/create",
             disabled: true,
           },
         ]}
         actions={
-          <ButtonLink variant="destructive" href="/engine/translation-manager">
+          <ButtonLink variant="destructive" href="/translation-manager">
             Cancel
           </ButtonLink>
         }

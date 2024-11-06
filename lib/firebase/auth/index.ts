@@ -2,6 +2,7 @@
 
 import {
   getAuth,
+  getIdToken as _getIdToken,
   GoogleAuthProvider,
   type NextOrObserver,
   onAuthStateChanged as _onAuthStateChanged,
@@ -37,6 +38,13 @@ export async function signInWithCustomToken(customToken: string) {
   const credential = await _signInWithCustomToken(auth, customToken);
 
   return credential.user.getIdToken(true);
+}
+
+export async function getIdToken() {
+  const currentUser = auth.currentUser;
+
+  if (!currentUser) throw new Error("NoUser");
+  return _getIdToken(currentUser, true);
 }
 
 export function onAuthStateChanged(cb: NextOrObserver<User>) {

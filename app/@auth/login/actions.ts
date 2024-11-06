@@ -17,13 +17,11 @@ export async function getCustomTokenAction(idToken: string) {
     body: { idToken },
   });
 
-  if (customTokenResult.success) {
-    revalidatePath("/", "layout");
-  }
-
   return customTokenResult.toJson();
 }
 
 export async function createSessionAction(idToken: string) {
   await createSession(cookies(), idToken);
+
+  revalidatePath("/", "layout");
 }

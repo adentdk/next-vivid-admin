@@ -10,10 +10,10 @@ export default function Page() {
         canGoBack
         breadcrumbs={[
           { title: "Home", href: "/engine" },
-          { title: "List of Menus", href: "/engine/menu" },
+          { title: "List of Menus", href: "/menus" },
           {
             title: "Create a new Menu",
-            href: "/engine/menus/create",
+            href: "/menus/create",
             disabled: true,
           },
         ]}
