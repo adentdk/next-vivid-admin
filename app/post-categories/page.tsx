@@ -32,6 +32,9 @@ export default async function Page({
     params: {
       limit: searchParams?.limit || 10,
     },
+    next: {
+      tags: ["post-categories/manage"],
+    },
   });
 
   if (!result.success) {

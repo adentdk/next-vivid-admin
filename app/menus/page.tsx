@@ -28,6 +28,9 @@ export default async function Page({
     params: {
       limit: searchParams?.limit || 10,
     },
+    next: {
+      tags: ["menus/manage"],
+    },
   });
 
   if (!result.success) {
