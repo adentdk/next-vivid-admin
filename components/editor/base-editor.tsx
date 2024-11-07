@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils/classnames";
 import "./styles.css";
 
 import { LinkBubbleMenu } from "./bubbles/link-bubble-menu";
+import { LineHeight } from "./extensions/line-height";
 import Link from "./extensions/link";
 import { ToolbarProvider } from "./toolbars/_toolbar-provider";
 import { BlockquoteToolbar } from "./toolbars/blockquote";
@@ -19,6 +20,7 @@ import { CodeBlockToolbar } from "./toolbars/code-block";
 import { HardBreakToolbar } from "./toolbars/hard-break";
 import { HorizontalRuleToolbar } from "./toolbars/horizontal-rule";
 import { ItalicToolbar } from "./toolbars/italic";
+import { LineHeightToolbar } from "./toolbars/line-height";
 import { LinkToolbar } from "./toolbars/link";
 import { OrderedListToolbar } from "./toolbars/ordered-list";
 import { RedoToolbar } from "./toolbars/redo";
@@ -27,43 +29,21 @@ import { UndoToolbar } from "./toolbars/undo";
 
 const extensions = [
   StarterKit.configure({
-    orderedList: {
-      HTMLAttributes: {
-        class: "list-decimal",
-      },
-    },
-    bulletList: {
-      HTMLAttributes: {
-        class: "list-disc",
-      },
-    },
-    code: {
-      HTMLAttributes: {
-        class: "bg-accent rounded-md p-1",
-      },
-    },
-    horizontalRule: {
-      HTMLAttributes: {
-        class: "my-2",
-      },
-    },
-    codeBlock: {
-      HTMLAttributes: {
-        class: "bg-primary text-primary-foreground p-2 text-sm rounded-md p-1",
-      },
-    },
+    orderedList: {},
+    bulletList: {},
+    code: {},
+    horizontalRule: {},
+    codeBlock: {},
     heading: {
       levels: [1, 2, 3, 4],
-      HTMLAttributes: {
-        class: "tiptap-heading",
-      },
     },
   }),
   Link,
+  LineHeight,
 ];
 
 const content = `
-<h2 class="tiptap-heading" style="text-align: center">Hello world 🌍</h2>
+<h2 style="text-align: center">Hello world 🌍</h2>
 `;
 
 export const StarterKitExample = () => {
@@ -71,19 +51,26 @@ export const StarterKitExample = () => {
     extensions: extensions as Extension[],
     content,
     immediatelyRender: false,
+    editorProps: {
+      attributes: {
+        class: "prose",
+      },
+    },
   });
 
   if (!editor) {
     return null;
   }
+
   return (
-    <div className="border w-full relative rounded-md overflow-hidden pb-3">
+    <div className="border w-full relative rounded-md overflow-hidden bg-background h-full">
       <div className="flex w-full items-center py-2 px-2 justify-between border-b  sticky top-0 left-0 bg-background z-20">
         <ToolbarProvider editor={editor}>
           <div className="flex items-center gap-2">
             <UndoToolbar />
             <RedoToolbar />
             <Separator orientation="vertical" className="h-7" />
+            <LineHeightToolbar />
             <BoldToolbar />
             <ItalicToolbar />
             <StrikeThroughToolbar />
@@ -102,10 +89,7 @@ export const StarterKitExample = () => {
         onClick={() => {
           editor?.chain().focus().run();
         }}
-        className={cn(
-          "flex h-auto w-full flex-col rounded-md border border-input shadow-sm focus-within:border-primary",
-          "",
-        )}
+        className={cn("flex h-full w-full flex-col rounded-md shadow-sm")}
       >
         <EditorContent className="outline-none border-none" editor={editor} />
 

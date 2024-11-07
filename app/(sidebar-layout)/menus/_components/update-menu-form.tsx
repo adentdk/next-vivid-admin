@@ -128,7 +128,9 @@ export default function UpdateMenuForm({
     [menuId],
   );
 
-  const isXlDestop = useMediaQuery("(min-width: 1280px)");
+  const isXlDestop = useMediaQuery("(min-width: 1280px)", {
+    defaultValue: false,
+  });
 
   return (
     <Form {...formMethods}>

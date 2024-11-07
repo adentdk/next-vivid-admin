@@ -77,7 +77,9 @@ const SidebarProvider = forwardRef<
     },
     ref,
   ) => {
-    const isMobile = useMediaQuery(`(max-width: ${SCREENS.md - 1}px)`);
+    const isMobile = useMediaQuery(`(max-width: ${SCREENS.md - 1}px)`, {
+      defaultValue: true,
+    });
     const [openMobile, setOpenMobile] = useState(false);
 
     // This is the internal state of the sidebar.

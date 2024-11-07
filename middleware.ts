@@ -14,7 +14,7 @@ export default async function middleware(req: NextRequest) {
 
   const session = await getSession(req.cookies);
 
-  if (["/logout", "/refresh-token"].includes(nextUrl.pathname) && session) {
+  if (["/logout"].includes(nextUrl.pathname) && session) {
     return nextResponse;
   }
 
@@ -42,7 +42,7 @@ export default async function middleware(req: NextRequest) {
 
     if (verifyResponse.code === 401) {
       nextResponse = NextResponse.redirect(
-        `${baseUrl}/refresh-token?redirectTarget=${nextUrl.pathname}`,
+        `${baseUrl}/logout?redirectTarget=${nextUrl.pathname}`,
       );
     }
   }

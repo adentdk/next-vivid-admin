@@ -1,16 +1,15 @@
 import { cookies } from "next/headers";
 
+import { TooltipProvider } from "@radix-ui/react-tooltip";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
 import { FirebaseAuthListener } from "@/components/firebase-auth-listener";
 import { Alerter } from "@/components/ui/alerter";
-import { SidebarProvider } from "@/components/ui/sidebar";
 import { getSession } from "@/lib/session/cookie";
 
 import "./globals.css";
 
-import { AppSidebar } from "./_components/app-sidebar";
 import { SessionStoreProvider } from "./_stores/session-store-provider";
 
 const geistSans = localFont({
@@ -40,8 +39,6 @@ export default async function RootLayout({
   auth: React.ReactNode;
 }>) {
   const cookieStore = cookies();
-  const defaultSidebarOpen = cookieStore.get("sidebar:state")?.value === "true";
-
   const sessionIdToken = await getSession(cookieStore);
 
   return (
@@ -49,21 +46,15 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SessionStoreProvider initialState={{ idToken: sessionIdToken }}>
-          <FirebaseAuthListener />
+        <TooltipProvider delayDuration={0}>
+          <SessionStoreProvider initialState={{ idToken: sessionIdToken }}>
+            <FirebaseAuthListener />
 
-          {sessionIdToken === null ? (
-            auth
-          ) : (
-            <SidebarProvider defaultOpen={defaultSidebarOpen}>
-              <AppSidebar />
+            {sessionIdToken === null ? auth : children}
+          </SessionStoreProvider>
 
-              <main className="space-y-4 w-full my-4 px-4">{children}</main>
-            </SidebarProvider>
-          )}
-        </SessionStoreProvider>
-
-        <Alerter />
+          <Alerter />
+        </TooltipProvider>
       </body>
     </html>
   );

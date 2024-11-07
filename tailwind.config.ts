@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-import { SCREENS } from "./lib/utils/theme";
+import { em, rem, round, SCREENS } from "./lib/utils/theme";
 
 const config: Config = {
   darkMode: ["class"],
@@ -84,6 +84,129 @@ const config: Config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      typography: {
+        DEFAULT: {
+          css: [
+            {
+              "--tw-prose-body": "hsl(var(--foreground))",
+              "--tw-prose-headings": "hsl(var(--foreground))",
+              "--tw-prose-lead": "hsl(var(--foreground))",
+              "--tw-prose-links": "hsl(var(--primary))",
+              "--tw-prose-bold": "hsl(var(--foreground))",
+              "--tw-prose-counters": "hsl(var(--foreground))",
+              "--tw-prose-bullets": "hsl(var(--foreground))",
+              "--tw-prose-hr": "hsl(var(--ring))",
+              "--tw-prose-quotes": "hsl(var(--muted-foreground))",
+              "--tw-prose-quote-borders": "hsl(var(--border))",
+              "--tw-prose-captions": "hsl(var(--foreground))",
+              "--tw-prose-code": "hsl(var(--foreground))",
+              "--tw-prose-code-bg": "hsl(var(--muted))",
+              "--tw-prose-pre-code": "hsl(var(--foreground))",
+              "--tw-prose-pre-bg": "hsl(var(--muted))",
+              "--tw-prose-th-borders": "hsl(var(--border))",
+              "--tw-prose-td-borders": "hsl(var(--border))",
+            },
+            {
+              p: {
+                marginTop: em(10, 16),
+                marginBottom: em(10, 16),
+              },
+              '[class~="lead"]': {
+                marginTop: em(12, 20),
+                marginBottom: em(12, 20),
+              },
+              blockquote: {
+                marginTop: em(16, 20),
+                marginBottom: em(16, 20),
+              },
+              h1: {
+                marginBottom: em(16, 36),
+              },
+              h2: {
+                marginTop: em(24, 24),
+                marginBottom: em(12, 24),
+              },
+              h3: {
+                marginTop: em(16, 20),
+                marginBottom: em(6, 20),
+              },
+              h4: {
+                marginTop: em(12, 16),
+                marginBottom: em(4, 16),
+              },
+              img: {
+                marginTop: em(16, 16),
+                marginBottom: em(16, 16),
+              },
+              picture: {
+                marginTop: em(16, 16),
+                marginBottom: em(16, 16),
+              },
+              video: {
+                marginTop: em(16, 16),
+                marginBottom: em(16, 16),
+              },
+              pre: {
+                marginTop: em(12, 14),
+                marginBottom: em(12, 14),
+              },
+              ol: {
+                marginTop: em(10, 16),
+                marginBottom: em(10, 16),
+              },
+              ul: {
+                marginTop: em(10, 16),
+                marginBottom: em(10, 16),
+              },
+              li: {
+                marginTop: em(4, 16),
+                marginBottom: em(4, 16),
+              },
+              "> ul > li p": {
+                marginTop: em(6, 16),
+                marginBottom: em(6, 16),
+              },
+              "> ul > li > p:first-child": {
+                marginTop: em(10, 16),
+              },
+              "> ul > li > p:last-child": {
+                marginBottom: em(10, 16),
+              },
+              "> ol > li > p:first-child": {
+                marginTop: em(10, 16),
+              },
+              "> ol > li > p:last-child": {
+                marginBottom: em(10, 16),
+              },
+              "ul ul, ul ol, ol ul, ol ol": {
+                marginTop: em(6, 16),
+                marginBottom: em(6, 16),
+              },
+              dl: {
+                marginTop: em(10, 16),
+                marginBottom: em(10, 16),
+              },
+              dt: {
+                marginTop: em(10, 16),
+              },
+              dd: {
+                marginTop: em(4, 16),
+              },
+              hr: {
+                marginTop: em(24, 16),
+                marginBottom: em(24, 16),
+              },
+              figure: {
+                marginTop: em(16, 16),
+                marginBottom: em(16, 16),
+              },
+              figcaption: {
+                marginTop: em(6, 14),
+              },
+            },
+          ],
+        },
       },
     },
   },

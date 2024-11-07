@@ -21,7 +21,7 @@ export function PageHeader(props: {
   const router = useRouter();
 
   return (
-    <header className="space-y-4">
+    <header className="space-y-4 my-4">
       <div className="flex gap-4">
         <SidebarTrigger />
         {typeof breadcrumbs !== "undefined" ? (

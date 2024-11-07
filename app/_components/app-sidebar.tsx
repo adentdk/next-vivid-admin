@@ -112,7 +112,7 @@ const items: Record<string, SidebarItem[]> = {
 
 export function AppSidebar() {
   return (
-    <Sidebar variant="floating">
+    <Sidebar>
       <AppSidebarHeader />
 
       <SidebarContent>

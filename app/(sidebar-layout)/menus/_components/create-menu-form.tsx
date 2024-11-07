@@ -107,7 +107,9 @@ export default function CreateMenuForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const isXlDestop = useMediaQuery("(min-width: 1280px)");
+  const isXlDestop = useMediaQuery("(min-width: 1280px)", {
+    defaultValue: false,
+  });
 
   return (
     <Form {...formMethods}>
