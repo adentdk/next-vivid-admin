@@ -26,7 +26,7 @@ export const ToolbarButton = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
       <Toggle
         size="sm"
         ref={ref}
-        className={cn("size-8 p-0", { "bg-accent": isActive }, className)}
+        className={cn("size-8 py-0", { "bg-accent": isActive }, className)}
         {...props}
       >
         {children}

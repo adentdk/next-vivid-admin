@@ -1,9 +1,9 @@
-import { type Editor as CoreEditor, Extension, type Range } from "@tiptap/core";
-import type { Node as PMNode } from "@tiptap/pm/model";
-import { Plugin, PluginKey } from "@tiptap/pm/state";
-import { Decoration, DecorationSet, type EditorView } from "@tiptap/pm/view";
+import { type Editor as CoreEditor, Extension, type Range } from '@tiptap/core';
+import type { Node as PMNode } from '@tiptap/pm/model';
+import { Plugin, PluginKey } from '@tiptap/pm/state';
+import { Decoration, DecorationSet, type EditorView } from '@tiptap/pm/view';
 
-declare module "@tiptap/core" {
+declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     search: {
       /**
@@ -49,9 +49,9 @@ const getRegex = (
   caseSensitive: boolean,
 ): RegExp => {
   const escapedString = disableRegex
-    ? searchString.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&")
+    ? searchString.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
     : searchString;
-  return new RegExp(escapedString, caseSensitive ? "gu" : "gui");
+  return new RegExp(escapedString, caseSensitive ? 'gu' : 'gui');
 };
 
 interface ProcessedSearches {
@@ -76,7 +76,7 @@ function processSearches(
 
   doc.descendants((node, pos) => {
     if (node.isText) {
-      textNodesWithPosition.push({ text: node.text || "", pos });
+      textNodesWithPosition.push({ text: node.text || '', pos });
     }
   });
 
@@ -203,7 +203,7 @@ const selectNext = (editor: CoreEditor) => {
     view
       .domAtPos(from)
       // @ts-ignore
-      .node.scrollIntoView({ behavior: "smooth", block: "center" });
+      .node.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 };
 
@@ -230,12 +230,12 @@ const selectPrevious = (editor: CoreEditor) => {
     view
       .domAtPos(from)
       // @ts-ignore
-      .node.scrollIntoView({ behavior: "smooth", block: "center" });
+      .node.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 };
 
 export const searchAndReplacePluginKey = new PluginKey(
-  "searchAndReplacePlugin",
+  'searchAndReplacePlugin',
 );
 
 export interface SearchAndReplaceOptions {
@@ -259,22 +259,22 @@ export const SearchAndReplace = Extension.create<
   SearchAndReplaceOptions,
   SearchAndReplaceStorage
 >({
-  name: "searchAndReplace",
+  name: 'searchAndReplace',
 
   addOptions() {
     return {
-      searchResultClass: " bg-yellow-200",
-      selectedResultClass: "bg-yellow-500",
+      searchResultClass: ' bg-yellow-200',
+      selectedResultClass: 'bg-yellow-500',
       disableRegex: true,
     };
   },
 
   addStorage() {
     return {
-      searchTerm: "",
-      replaceTerm: "",
+      searchTerm: '',
+      replaceTerm: '',
       results: [],
-      lastSearchTerm: "",
+      lastSearchTerm: '',
       selectedResult: 0,
       lastSelectedResult: 0,
       caseSensitive: false,
@@ -418,5 +418,3 @@ export const SearchAndReplace = Extension.create<
     ];
   },
 });
-
-export default SearchAndReplace;

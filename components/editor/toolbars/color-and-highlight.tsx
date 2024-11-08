@@ -5,6 +5,8 @@ import type { ColorOptions } from "@tiptap/extension-color";
 import type { HighlightOptions } from "@tiptap/extension-highlight";
 import { Check, ChevronDown } from "lucide-react";
 
+import { useEditorContext } from "@/components/editor/partials/editor-provider";
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
@@ -12,9 +14,9 @@ import {
 } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils/classnames";
 
-import ToolbarButton from "./_toolbar-button";
-import { useToolbar } from "./_toolbar-provider";
+import ToolbarButton from "../partials/toolbar-button";
 
 export type TextStylingExtensions =
   | Extension<ColorOptions, any>
@@ -79,8 +81,8 @@ const ColorHighlightButton = ({
   </button>
 );
 
-export const ColorHighlightToolbar = () => {
-  const { editor } = useToolbar();
+export const ColorAndHighlightToolbar = () => {
+  const { editor } = useEditorContext();
 
   const currentColor = editor?.getAttributes("textStyle").color;
   const currentHighlight = editor?.getAttributes("highlight").color;
@@ -114,7 +116,9 @@ export const ColorHighlightToolbar = () => {
             aria-label="Set color & highlight"
             style={{
               color: currentColor,
+              backgroundColor: currentHighlight,
             }}
+            className="min-w-min"
           >
             <span className="text-md">A</span>
             <ChevronDown className="ml-2 size-4" />

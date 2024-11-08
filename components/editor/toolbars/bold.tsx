@@ -1,19 +1,20 @@
-"use client";
+'use client';
 
-import { forwardRef, Fragment } from "react";
+import { forwardRef, Fragment } from 'react';
 
-import type { Extension } from "@tiptap/core";
-import type { StarterKitOptions } from "@tiptap/starter-kit";
-import { BoldIcon } from "lucide-react";
+import type { Extension } from '@tiptap/core';
+import type { StarterKitOptions } from '@tiptap/starter-kit';
+import { BoldIcon } from 'lucide-react';
 
-import ToolbarButton, { ToolbarButtonProps } from "./_toolbar-button";
-import { useToolbar } from "./_toolbar-provider";
+import { useEditorContext } from '@/components/editor/partials/editor-provider';
+
+import ToolbarButton, { ToolbarButtonProps } from '../partials/toolbar-button';
 
 export type StarterKitExtensions = Extension<StarterKitOptions, any>;
 
 const BoldToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   ({ className, onClick, children, ...props }, ref) => {
-    const { editor } = useToolbar();
+    const { editor } = useEditorContext();
     return (
       <ToolbarButton
         tooltip={
@@ -23,7 +24,7 @@ const BoldToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
           </Fragment>
         }
         aria-label="Set bold"
-        isActive={editor?.isActive("bold")}
+        isActive={editor?.isActive('bold')}
         onClick={(e) => {
           editor?.chain().focus().toggleBold().run();
           onClick?.(e);
@@ -38,6 +39,6 @@ const BoldToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   },
 );
 
-BoldToolbar.displayName = "BoldToolbar";
+BoldToolbar.displayName = 'BoldToolbar';
 
 export { BoldToolbar };

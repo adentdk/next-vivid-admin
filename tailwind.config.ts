@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-import { em, rem, round, SCREENS } from "./lib/utils/theme";
+import { em, SCREENS } from "./lib/utils/theme";
 
 const config: Config = {
   darkMode: ["class"],

@@ -1,15 +1,16 @@
-"use client";
+'use client';
 
-import { forwardRef } from "react";
+import { forwardRef } from 'react';
 
-import { Undo2 } from "lucide-react";
+import { Undo2 } from 'lucide-react';
 
-import ToolbarButton, { ToolbarButtonProps } from "./_toolbar-button";
-import { useToolbar } from "./_toolbar-provider";
+import { useEditorContext } from '@/components/editor/partials/editor-provider';
+
+import ToolbarButton, { ToolbarButtonProps } from '../partials/toolbar-button';
 
 const UndoToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   ({ className, onClick, children, ...props }, ref) => {
-    const { editor } = useToolbar();
+    const { editor } = useEditorContext();
 
     return (
       <ToolbarButton
@@ -29,6 +30,6 @@ const UndoToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   },
 );
 
-UndoToolbar.displayName = "UndoToolbar";
+UndoToolbar.displayName = 'UndoToolbar';
 
 export { UndoToolbar };

@@ -40,7 +40,7 @@ export const ImageExtension = Image.extend({
         default: null,
       },
       width: {
-        default: "100%",
+        default: "90%",
       },
       height: {
         default: null,
@@ -175,6 +175,13 @@ export function TiptapImageComponent(props: NodeViewProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resizing, resizeInitialMouseX, resizeInitialWidth]);
 
+  const { alt } = node.attrs;
+
+  const onEditAlt = () => {
+    const newAlt = prompt("Set alt text:", alt || "");
+    updateAttributes({ alt: newAlt });
+  };
+
   return (
     <NodeViewWrapper
       ref={nodeRef}
@@ -197,9 +204,28 @@ export function TiptapImageComponent(props: NodeViewProps) {
         <img
           ref={imageRef}
           src={node.attrs.src}
-          alt={node.attrs.alt}
+          alt={alt}
           title={node.attrs.title}
         />
+        <span className="text-xs absolute bottom-3 left-3 max-w-[calc(100%-20px)] px-2 border border-border bg-background/80 inline-flex items-center overflow-hidden gap-1">
+          <span className="flex-none text-xl font-bold">
+            {alt ? (
+              <span className="text-safe">✔</span>
+            ) : (
+              <span className="text-destructive">!</span>
+            )}
+          </span>
+          <span className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
+            {alt ? `Alt text: "${alt}"` : `Alt text missing.`}
+          </span>
+          <button
+            className="flex-none border-0 p-0 bg-transparent appearance-none underline"
+            type="button"
+            onClick={onEditAlt}
+          >
+            Edit
+          </button>
+        </span>
         <NodeViewContent as="figcaption" className="text-center">
           {node.attrs.title}
         </NodeViewContent>

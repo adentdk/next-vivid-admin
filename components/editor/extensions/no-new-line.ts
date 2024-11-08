@@ -1,16 +1,16 @@
-import { Extension } from "@tiptap/core";
-import { Plugin, PluginKey } from "@tiptap/pm/state";
+import { Extension } from '@tiptap/core';
+import { Plugin, PluginKey } from '@tiptap/pm/state';
 
 export const NoNewLine = Extension.create({
-  name: "no_new_line",
+  name: 'no_new_line',
 
   addProseMirrorPlugins() {
     return [
       new Plugin({
-        key: new PluginKey("eventHandler"),
+        key: new PluginKey('eventHandler'),
         props: {
           handleKeyDown: (view, event) => {
-            if (event.key === "Enter" && !event.shiftKey) {
+            if (event.key === 'Enter' && !event.shiftKey) {
               return true;
             }
           },

@@ -1,15 +1,52 @@
-import { StarterKitExample } from "@/components/editor/base-editor";
-import FormLayout from "@/components/form-layout";
+import { Fragment } from "react";
 
-export default async function Page() {
+import { ArrowLeft } from "lucide-react";
+
+import { FullEditor } from "@/components/editor/full-editor";
+import { ToolbarButtons } from "@/components/editor/partials/toolbar-buttons";
+import { ButtonLink } from "@/components/ui/button-link";
+import { Tooltip } from "@/components/ui/tooltip";
+
+export default function Page() {
   return (
-    <div className="absolute inset-0 top-0 left-0 w-full h-full">
-      <div className="flex h-full overflow-hidden">
-        <StarterKitExample />
-
-        <div className="w-96">
-          <h1>halo</h1>
-        </div>
+    <div className="flex h-screen overflow-hidden">
+      <FullEditor
+        className="h-screen"
+        toolbar={
+          <Fragment>
+            <ButtonLink href="#back">
+              <ArrowLeft className="size-5" />
+            </ButtonLink>
+            <ToolbarButtons
+              toolbars={[
+                "UndoToolbar",
+                "RedoToolbar",
+                "Separator",
+                "HeadingTooolbar",
+                "BoldToolbar",
+                "ItalicToolbar",
+                "ColorAndHighlightToolbar",
+                "Separator",
+                "AlignmentToolbar",
+                "CodeToolbar",
+                "CodeBlockToolbar",
+                "BulletListToolbar",
+                "OrderedListToolbar",
+                "Separator",
+                "HardBreakToolbar",
+                "HorizontalRuleToolbar",
+                "LinkToolbar",
+                "Separator",
+                "ImagePlaceholderToolbar",
+                "FlexGap",
+                "SearchAndReplaceToolbar",
+              ]}
+            />
+          </Fragment>
+        }
+      />
+      <div className="w-96">
+        <h1>halo</h1>
       </div>
     </div>
   );

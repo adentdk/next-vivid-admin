@@ -1,15 +1,16 @@
-"use client";
+'use client';
 
-import { forwardRef } from "react";
+import { forwardRef } from 'react';
 
-import { WrapText } from "lucide-react";
+import { WrapText } from 'lucide-react';
 
-import ToolbarButton, { ToolbarButtonProps } from "./_toolbar-button";
-import { useToolbar } from "./_toolbar-provider";
+import { useEditorContext } from '@/components/editor/partials/editor-provider';
+
+import ToolbarButton, { ToolbarButtonProps } from '../partials/toolbar-button';
 
 const HardBreakToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   ({ className, onClick, children, ...props }, ref) => {
-    const { editor } = useToolbar();
+    const { editor } = useEditorContext();
     return (
       <ToolbarButton
         tooltip="Hard break"
@@ -27,6 +28,6 @@ const HardBreakToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   },
 );
 
-HardBreakToolbar.displayName = "HardBreakToolbar";
+HardBreakToolbar.displayName = 'HardBreakToolbar';
 
 export { HardBreakToolbar };

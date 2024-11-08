@@ -1,15 +1,16 @@
-"use client";
+'use client';
 
-import { forwardRef } from "react";
+import { forwardRef } from 'react';
 
-import { SeparatorHorizontal } from "lucide-react";
+import { SeparatorHorizontal } from 'lucide-react';
 
-import ToolbarButton, { ToolbarButtonProps } from "./_toolbar-button";
-import { useToolbar } from "./_toolbar-provider";
+import { useEditorContext } from '@/components/editor/partials/editor-provider';
+
+import ToolbarButton, { ToolbarButtonProps } from '../partials/toolbar-button';
 
 const HorizontalRuleToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   ({ className, onClick, children, ...props }, ref) => {
-    const { editor } = useToolbar();
+    const { editor } = useEditorContext();
     return (
       <ToolbarButton
         tooltip="Horizontal Rule"
@@ -27,6 +28,6 @@ const HorizontalRuleToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   },
 );
 
-HorizontalRuleToolbar.displayName = "HorizontalRuleToolbar";
+HorizontalRuleToolbar.displayName = 'HorizontalRuleToolbar';
 
 export { HorizontalRuleToolbar };
