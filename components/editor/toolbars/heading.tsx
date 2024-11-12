@@ -3,7 +3,8 @@
 import { useMemo } from "react";
 
 import type { Extension } from "@tiptap/core";
-import type { StarterKitOptions } from "@tiptap/starter-kit";
+import { HeadingOptions } from "@tiptap/extension-heading";
+import { ParagraphOptions } from "@tiptap/extension-paragraph";
 import { Check, ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -24,17 +25,21 @@ export const HeadingTooolbar = () => {
   const { editor } = useEditorContext();
   const { extensions = [] } = editor.extensionManager ?? [];
 
-  const baseKitExt = extensions.find(
-    (k) => k.name === "starterKit",
-  ) as Extension<StarterKitOptions>;
+  const headingExt = extensions.find(
+    (k) => k.name === "heading",
+  ) as Extension<HeadingOptions>;
 
   const levels = useMemo<HeadingLevel[]>(() => {
-    if (baseKitExt?.options?.heading) {
-      return baseKitExt?.options?.heading?.levels ?? [1, 2, 3, 4, 5, 6];
+    if (headingExt?.options) {
+      return headingExt?.options?.levels ?? [1, 2, 3, 4, 5, 6];
     }
 
     return [];
-  }, [baseKitExt?.options?.heading]);
+  }, [headingExt?.options]);
+
+  const paragraphExt = extensions.find(
+    (k) => k.name === "paragraph",
+  ) as Extension<ParagraphOptions>;
 
   const items: any[] = levels.map((level) => ({
     action: () => editor.commands.toggleHeading({ level }),
@@ -45,7 +50,7 @@ export const HeadingTooolbar = () => {
     shortcutKeys: ["alt", "mod", `${level}`],
   }));
 
-  if (baseKitExt && baseKitExt.options.paragraph !== false) {
+  if (paragraphExt) {
     items.push({
       action: () => editor.commands.setParagraph(),
       isActive: () => editor.isActive("paragraph") || false,

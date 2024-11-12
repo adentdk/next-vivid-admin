@@ -42,13 +42,13 @@ export const BaseEditor = forwardRef<Editor | null, BaseEditorProps>(
       <EditorProvider editor={editor}>
         <div
           className={cn(
-            "border flex flex-col w-full relative rounded-md overflow-hidden",
+            "border flex flex-col w-full relative rounded-md overflow-hidden border-input focus-within:border-primary",
             className,
           )}
         >
           {typeof toolbar !== "undefined" ? (
             <div className="flex w-full items-center py-2 px-2 justify-between border-b sticky top-0 bg-background z-20">
-              <div className="flex flex-1 items-center gap-2 flex-wrap">
+              <div className="flex flex-1 items-center gap-2 flex-wrap justify-between">
                 {toolbar}
               </div>
             </div>
@@ -58,7 +58,7 @@ export const BaseEditor = forwardRef<Editor | null, BaseEditorProps>(
               editor?.chain().focus().run();
             }}
             className={cn(
-              "flex flex-1 max-h-full w-full flex-col rounded-md border border-input shadow-sm focus-within:border-primary",
+              "flex flex-1 max-h-full w-full flex-col rounded-md shadow-sm",
               "overflow-y-auto scrollbar-thin bg-background",
             )}
           >

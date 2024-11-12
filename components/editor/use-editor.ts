@@ -1,6 +1,24 @@
 import { useCallback } from "react";
 
+import Blockquote from "@tiptap/extension-blockquote";
+import Bold from "@tiptap/extension-bold";
+import Bulletlist from "@tiptap/extension-bullet-list";
+import Code from "@tiptap/extension-code";
+import CodeBlock from "@tiptap/extension-code-block";
+import Document from "@tiptap/extension-document";
+import Dropcursor from "@tiptap/extension-dropcursor";
+import Gapcursor from "@tiptap/extension-gapcursor";
+import HardBreak from "@tiptap/extension-hard-break";
+import Heading from "@tiptap/extension-heading";
+import History from "@tiptap/extension-history";
+import HorizontalRule from "@tiptap/extension-horizontal-rule";
+import Italic from "@tiptap/extension-italic";
+import ListItem from "@tiptap/extension-list-item";
+import OrderedList from "@tiptap/extension-ordered-list";
+import Paragraph from "@tiptap/extension-paragraph";
 import Placeholder from "@tiptap/extension-placeholder";
+import Strike from "@tiptap/extension-strike";
+import Text from "@tiptap/extension-text";
 import TextAlign from "@tiptap/extension-text-align";
 import TextStyle from "@tiptap/extension-text-style";
 import {
@@ -10,7 +28,6 @@ import {
   useEditor as useEditorPrimitive,
   type UseEditorOptions as UseEditorPrimitiveOptions,
 } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
 import { useDebounceCallback } from "usehooks-ts";
 
 import { cn } from "@/lib/utils/classnames";
@@ -30,13 +47,27 @@ export interface UseEditorOptions
 const createExtensions = (
   options: Pick<UseEditorOptions, "placeholder">,
 ): Extensions => [
-  StarterKit.configure({
-    heading: {
-      levels: [1, 2, 3, 4],
-    },
-    history: {
-      depth: 50,
-    },
+  Document,
+  Blockquote,
+  Bulletlist,
+  OrderedList,
+  ListItem,
+  CodeBlock,
+  HardBreak,
+  Heading.configure({
+    levels: [1, 2, 3, 4],
+  }),
+  Paragraph,
+  HorizontalRule,
+  Text,
+  Bold,
+  Code,
+  Italic,
+  Strike,
+  Dropcursor,
+  Gapcursor,
+  History.configure({
+    depth: 50,
   }),
   ResetMarksOnEnter,
   TextAlign.configure({
@@ -103,7 +134,10 @@ export const useEditor = ({
   );
 
   const editor = useEditorPrimitive({
-    extensions: [...extensions, ...createExtensions({ placeholder })],
+    extensions: [...extensions, ...createExtensions({ placeholder })].filter(
+      (ext, index, self) =>
+        self.findIndex((e) => e.name === ext.name) === index,
+    ),
     content,
     immediatelyRender: false,
     editorProps: {

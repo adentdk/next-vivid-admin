@@ -2,16 +2,15 @@ import { Fragment } from "react";
 
 import { ArrowLeft } from "lucide-react";
 
-import { FullEditor } from "@/components/editor/full-editor";
 import { ToolbarButtons } from "@/components/editor/partials/toolbar-buttons";
+import { PostEditor } from "@/components/editor/post-editor";
 import { ButtonLink } from "@/components/ui/button-link";
-import { Tooltip } from "@/components/ui/tooltip";
 
 export default function Page() {
   return (
     <div className="flex h-screen overflow-hidden">
-      <FullEditor
-        className="h-screen"
+      <PostEditor
+        className="h-screen rounded-none border-none"
         toolbar={
           <Fragment>
             <ButtonLink href="#back">
@@ -19,6 +18,7 @@ export default function Page() {
             </ButtonLink>
             <ToolbarButtons
               toolbars={[
+                "Separator",
                 "UndoToolbar",
                 "RedoToolbar",
                 "Separator",

@@ -58,6 +58,7 @@ function FullEditor({
     <BaseEditor
       ref={editorRef}
       extensions={[
+        ...extensions,
         Link,
         SearchAndReplace,
         ImagePlaceholder,
@@ -75,7 +76,6 @@ function FullEditor({
         Highlight.configure({
           multicolor: true,
         }),
-        ...extensions,
       ]}
       toolbar={<ToolbarButtons toolbars={toolbars} />}
       {...restProps}
