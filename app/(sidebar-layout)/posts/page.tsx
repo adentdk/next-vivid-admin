@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/page-header";
 import { ButtonLink } from "@/components/ui/button-link";
 import { DataTable } from "@/components/ui/data-table";
 import {
+  LocaleEnum,
   PaginationParams,
   PaginatitedResponse,
   PostManageType,
@@ -11,9 +12,12 @@ import {
 import { FetchApiServer } from "@/lib/utils/fetch-api-server";
 
 import { columns } from "./_components/datatable-columns";
+import { LocaleFilter } from "./_components/locale-filter";
 
 type PageProps = {
-  searchParams: PaginationParams;
+  searchParams: PaginationParams & {
+    locale: string;
+  };
 };
 
 export default async function Page({ searchParams }: PageProps) {
@@ -22,6 +26,7 @@ export default async function Page({ searchParams }: PageProps) {
     url: "/v1/posts/manage",
     params: {
       limit: searchParams?.limit || 10,
+      locale: searchParams?.locale ?? LocaleEnum.ID,
     },
     next: {
       tags: ["posts/manage"],
@@ -37,7 +42,7 @@ export default async function Page({ searchParams }: PageProps) {
       <PageHeader
         title="List of Posts"
         breadcrumbs={[
-          { title: "Home", href: "" },
+          { title: "Home", href: "/" },
           {
             title: "Posts",
             href: "/posts",
@@ -50,7 +55,18 @@ export default async function Page({ searchParams }: PageProps) {
         }
       />
 
-      <DataTable columns={columns} data={result.data.items} />
+      <div>
+        <DataTable
+          actions={
+            <Fragment>
+              <LocaleFilter />
+              <div className="flex flex-1"></div>
+            </Fragment>
+          }
+          columns={columns}
+          data={result.data.items}
+        />
+      </div>
     </Fragment>
   );
 }

@@ -90,7 +90,7 @@ const DataTableComponent = <TData, TValue>(
 
   return (
     <div className="space-y-4 pb-4">
-      <div className="flex gap-4 justify-end items-center">
+      <div className="flex flex-wrap gap-4 justify-end items-center">
         {actions}
         <DataTableViewOptions table={table} />
       </div>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -24,28 +25,43 @@ export const columns: ColumnDef<PostManageType>[] = [
   {
     size: 4,
     accessorKey: "title",
-    header: "title",
-    cell: ({ row }) => {
-      return row.original.title || <i>No title</i>;
+    header: "Title",
+    cell: ({ row: { original: post } }) => {
+      return post.title || <i>No title</i>;
+    },
+  },
+  {
+    size: 4,
+    accessorKey: "locale",
+    header: "Locale",
+    cell: ({ row: { original: post } }) => {
+      return post.locale;
     },
   },
   {
     size: 2,
-    accessorKey: "statuses",
+    accessorKey: "status",
     header: "Status",
-    cell: ({ row }) => {
+    cell: ({ row: { original: post } }) => {
       return (
-        row.original.statuses
-          ?.map((status) => `${status.locale}: ${status.status}`)
-          .join(", ") ?? "-"
+        <Badge variant={post.status === "published" ? "default" : "secondary"}>
+          {post.status}
+        </Badge>
       );
+    },
+  },
+  {
+    size: 4,
+    accessorKey: "publishTime",
+    header: "Publish Time",
+    cell: ({ row: { original: post } }) => {
+      return post.publishTime || "-";
     },
   },
   {
     size: 2,
     id: "actions",
-    cell: ({ row }) => {
-      const menu = row.original;
+    cell: ({ row: { original: post } }) => {
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -57,10 +73,10 @@ export const columns: ColumnDef<PostManageType>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
-              <Link href={`/posts/${menu._id}/update`}>Update</Link>
+              <Link href={`/posts/${post.id}/update`}>Update</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
-              <Link href={`/posts/${menu._id}/delete`}>Delete</Link>
+              <Link href={`/posts/${post.id}/delete`}>Delete</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -3,9 +3,10 @@ import { PostStatusEnum } from "../enum";
 import { BaseDataType } from "./_base";
 
 export interface PostManageType extends BaseDataType {
+  publishTime: string;
   title: string;
-  statuses: {
-    locale: string;
-    status: PostStatusEnum;
-  }[];
+  status: PostStatusEnum;
+  authorId: string;
+  approvedBy: string;
+  locale: string;
 }
