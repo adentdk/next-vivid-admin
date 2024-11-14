@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { Fragment } from "react";
 
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 import type { Metadata } from "next";
@@ -34,8 +35,10 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
   auth,
+  modals,
 }: Readonly<{
   children: React.ReactNode;
+  modals: React.ReactNode;
   auth: React.ReactNode;
 }>) {
   const cookieStore = cookies();
@@ -50,7 +53,14 @@ export default async function RootLayout({
           <SessionStoreProvider initialState={{ idToken: sessionIdToken }}>
             <FirebaseAuthListener />
 
-            {sessionIdToken === null ? auth : children}
+            {sessionIdToken === null ? (
+              auth
+            ) : (
+              <Fragment>
+                {children}
+                {modals}
+              </Fragment>
+            )}
           </SessionStoreProvider>
 
           <Alerter />

@@ -21,7 +21,7 @@ import { MenuGroupMap } from "../_const/menu";
 export const columns: ColumnDef<MenuType>[] = [
   {
     size: 4,
-    accessorKey: "_id",
+    accessorKey: "id",
     header: "ID",
   },
   {
@@ -43,7 +43,7 @@ export const columns: ColumnDef<MenuType>[] = [
     header: "Children Count",
     cell: ({ row }) => {
       return (
-        <ButtonLink href={`/menus?parentMenuId=${row.original._id}`}>
+        <ButtonLink href={`/menus?parentMenuId=${row.original.id}`}>
           {(row.original as any)?._childrenCount ?? 0}
         </ButtonLink>
       );
@@ -73,10 +73,10 @@ export const columns: ColumnDef<MenuType>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
-              <Link href={`/menus/${menu._id}/update`}>Update</Link>
+              <Link href={`/menus/${menu.id}/update`}>Update</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
-              <Link href={`/menus/${menu._id}/delete`}>Delete</Link>
+              <Link href={`/menus/${menu.id}/delete`}>Delete</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

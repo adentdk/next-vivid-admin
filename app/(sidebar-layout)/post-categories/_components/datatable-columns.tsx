@@ -19,7 +19,7 @@ import { PostCategoryType } from "@/lib/types";
 export const columns: ColumnDef<PostCategoryType>[] = [
   {
     size: 4,
-    accessorKey: "_id",
+    accessorKey: "id",
     header: "ID",
   },
   {
@@ -34,7 +34,7 @@ export const columns: ColumnDef<PostCategoryType>[] = [
     cell: ({ row }) => {
       return (
         <ButtonLink
-          href={`/post-categories?parentCategoryId=${row.original._id}`}
+          href={`/post-categories?parentCategoryId=${row.original.id}`}
         >
           {row.original._childrenCount ?? 0}
         </ButtonLink>
@@ -57,10 +57,10 @@ export const columns: ColumnDef<PostCategoryType>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
-              <Link href={`/post-categories/${menu._id}/update`}>Update</Link>
+              <Link href={`/post-categories/${menu.id}/update`}>Update</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
-              <Link href={`/post-categories/${menu._id}/delete`}>Delete</Link>
+              <Link href={`/post-categories/${menu.id}/delete`}>Delete</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

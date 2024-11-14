@@ -49,7 +49,7 @@ export default async function Page({ searchParams }: PageProps) {
           },
         ]}
         actions={
-          <ButtonLink href="/posts/create" variant="default">
+          <ButtonLink href="/posts/init" variant="default">
             Add new post
           </ButtonLink>
         }

@@ -19,11 +19,6 @@ import { PostManageType } from "@/lib/types";
 export const columns: ColumnDef<PostManageType>[] = [
   {
     size: 4,
-    accessorKey: "_id",
-    header: "ID",
-  },
-  {
-    size: 4,
     accessorKey: "title",
     header: "Title",
     cell: ({ row: { original: post } }) => {
