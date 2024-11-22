@@ -1,7 +1,7 @@
 import { objectToQueryString } from "./query-string";
 import { BaseApiResponse } from "./response";
 
-interface FetchApiConfig {
+export interface FetchApiConfig {
   url: string;
   method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   params?: Record<string, any>;
@@ -52,7 +52,10 @@ export class FetchApi {
 
     if (body) {
       if (body instanceof FormData) {
-        config.headers = { ...headers, "Content-Type": "multipart/form-data" };
+        const headers = config.headers as Record<string, any>;
+        if (headers && headers["Content-Type"]) {
+          delete headers["Content-Type"];
+        }
         config.body = body;
       } else {
         config.body = JSON.stringify(body);
@@ -83,16 +86,17 @@ export class FetchApi {
     } = config;
 
     const fullUrl = this.buildFullUrl(url, params);
-    const requestConfig = this.createRequestConfig(
-      method,
-      headers,
-      body,
-      cache,
-      next,
-    );
 
     try {
-      const res = await fetch(fullUrl, await requestConfig);
+      const requestConfig = await this.createRequestConfig(
+        method,
+        headers,
+        body,
+        cache,
+        next,
+      );
+
+      const res = await fetch(fullUrl, requestConfig);
 
       if (res.status === 204) {
         return new BaseApiResponse({

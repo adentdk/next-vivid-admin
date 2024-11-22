@@ -7,6 +7,7 @@ import localFont from "next/font/local";
 
 import { FirebaseAuthListener } from "@/components/firebase-auth-listener";
 import { Alerter } from "@/components/ui/alerter";
+import { Toaster } from "@/components/ui/sonner";
 import { getSession } from "@/lib/session/cookie";
 
 import "./globals.css";
@@ -64,6 +65,7 @@ export default async function RootLayout({
           </SessionStoreProvider>
 
           <Alerter />
+          <Toaster />
         </TooltipProvider>
       </body>
     </html>

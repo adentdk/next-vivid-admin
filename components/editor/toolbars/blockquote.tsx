@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 
-import { TextQuote } from 'lucide-react';
+import { TextQuote } from "lucide-react";
 
-import { useEditorContext } from '@/components/editor/partials/editor-provider';
+import { useEditorContext } from "@/components/editor/partials/editor-provider";
 
 import ToolbarButton, {
   type ToolbarButtonProps,
-} from '../partials/toolbar-button';
+} from "../partials/toolbar-button";
 
 const BlockquoteToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   ({ className, onClick, children, ...props }, ref) => {
@@ -17,7 +17,7 @@ const BlockquoteToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
       <ToolbarButton
         tooltip="Blockquote"
         aria-label="Insert blockquote"
-        isActive={editor?.isActive('blockquote')}
+        isActive={editor?.isActive("blockquote")}
         onClick={(e) => {
           editor?.chain().focus().toggleBlockquote().run();
           onClick?.(e);
@@ -32,6 +32,6 @@ const BlockquoteToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   },
 );
 
-BlockquoteToolbar.displayName = 'BlockquoteToolbar';
+BlockquoteToolbar.displayName = "BlockquoteToolbar";
 
 export { BlockquoteToolbar };

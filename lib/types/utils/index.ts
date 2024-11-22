@@ -6,7 +6,7 @@ export type PaginationParams = {
   orderType?: "asc" | "desc";
 };
 
-export type PaginatitedResponse<T> = {
+export type PaginatedResponse<T> = {
   pointer: string;
   items: T[];
   total: number;

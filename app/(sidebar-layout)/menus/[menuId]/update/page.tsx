@@ -29,7 +29,7 @@ export default async function Page({
           { title: "List of Menus", href: "/menu" },
           {
             title: "Update Menu",
-            href: `/menus/${menu.id}/update`,
+            href: `/menus/${menu.id}/edit`,
             disabled: true,
           },
         ]}

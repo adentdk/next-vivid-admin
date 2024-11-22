@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 import { Fragment } from "react";
 
+import { fetcher } from "@/app/api-fetcher";
 import { PageHeader } from "@/components/page-header";
 import { ButtonLink } from "@/components/ui/button-link";
 import { DataTable } from "@/components/ui/data-table";
-import { MenuType, PaginationParams, PaginatitedResponse } from "@/lib/types";
-import { FetchApiServer } from "@/lib/utils/fetch-api-server";
+import { MenuType, PaginationParams, PaginatedResponse } from "@/lib/types";
 
 import { columns } from "./_components/datatable-columns";
 
@@ -22,16 +22,14 @@ export const metadata: Metadata = {
 export default async function Page({
   searchParams: { parentMenuId, ...searchParams },
 }: PageProps) {
-  const api = new FetchApiServer();
-  const result = await api.fetch<PaginatitedResponse<MenuType>>({
-    url: "/v1/menus/manage",
-    params: {
-      limit: searchParams?.limit || 10,
+  const result = await fetcher<PaginatedResponse<MenuType>>(
+    "/v1/menus/manage",
+    {
+      params: {
+        limit: searchParams?.limit || 10,
+      },
     },
-    next: {
-      tags: ["menus/manage"],
-    },
-  });
+  );
 
   if (!result.success) {
     return <div>Error</div>;

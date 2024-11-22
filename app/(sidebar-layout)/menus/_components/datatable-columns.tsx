@@ -73,7 +73,7 @@ export const columns: ColumnDef<MenuType>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
-              <Link href={`/menus/${menu.id}/update`}>Update</Link>
+              <Link href={`/menus/${menu.id}/edit`}>Update</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
               <Link href={`/menus/${menu.id}/delete`}>Delete</Link>

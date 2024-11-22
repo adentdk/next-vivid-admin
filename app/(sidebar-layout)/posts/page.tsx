@@ -1,15 +1,15 @@
 import { Fragment } from "react";
 
+import { fetcher } from "@/app/api-fetcher";
 import { PageHeader } from "@/components/page-header";
 import { ButtonLink } from "@/components/ui/button-link";
 import { DataTable } from "@/components/ui/data-table";
 import {
   LocaleEnum,
   PaginationParams,
-  PaginatitedResponse,
+  PaginatedResponse,
   PostManageType,
 } from "@/lib/types";
-import { FetchApiServer } from "@/lib/utils/fetch-api-server";
 
 import { columns } from "./_components/datatable-columns";
 import { LocaleFilter } from "./_components/locale-filter";
@@ -21,17 +21,15 @@ type PageProps = {
 };
 
 export default async function Page({ searchParams }: PageProps) {
-  const api = new FetchApiServer();
-  const result = await api.fetch<PaginatitedResponse<PostManageType>>({
-    url: "/v1/posts/manage",
-    params: {
-      limit: searchParams?.limit || 10,
-      locale: searchParams?.locale ?? LocaleEnum.ID,
+  const result = await fetcher<PaginatedResponse<PostManageType>>(
+    "/v1/posts/manage",
+    {
+      params: {
+        limit: searchParams?.limit || 10,
+        locale: searchParams?.locale ?? LocaleEnum.ID,
+      },
     },
-    next: {
-      tags: ["posts/manage"],
-    },
-  });
+  );
 
   if (!result.success) {
     return <div>Error</div>;

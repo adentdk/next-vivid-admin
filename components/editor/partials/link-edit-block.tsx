@@ -4,13 +4,13 @@ import {
   useImperativeHandle,
   useRef,
   useState,
-} from 'react';
+} from "react";
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { cn } from '@/lib/utils/classnames';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { cn } from "@/lib/utils/classnames";
 
 export interface LinkEditorProps extends React.HTMLAttributes<HTMLDivElement> {
   defaultUrl?: string;
@@ -22,8 +22,8 @@ export interface LinkEditorProps extends React.HTMLAttributes<HTMLDivElement> {
 export const LinkEditBlock = forwardRef<HTMLDivElement, LinkEditorProps>(
   ({ onSave, defaultIsNewTab, defaultUrl, defaultText, className }, ref) => {
     const formRef = useRef<HTMLDivElement>(null);
-    const [url, setUrl] = useState(defaultUrl || '');
-    const [text, setText] = useState(defaultText || '');
+    const [url, setUrl] = useState(defaultUrl || "");
+    const [text, setText] = useState(defaultText || "");
     const [isNewTab, setIsNewTab] = useState(defaultIsNewTab || false);
 
     const handleSave = useCallback(
@@ -31,13 +31,13 @@ export const LinkEditBlock = forwardRef<HTMLDivElement, LinkEditorProps>(
         e.preventDefault();
         if (formRef.current) {
           const isValid = Array.from(
-            formRef.current.querySelectorAll('input'),
+            formRef.current.querySelectorAll("input"),
           ).every((input) => input.checkValidity());
 
           if (isValid) {
             onSave(url, text, isNewTab);
           } else {
-            formRef.current.querySelectorAll('input').forEach((input) => {
+            formRef.current.querySelectorAll("input").forEach((input) => {
               if (!input.checkValidity()) {
                 input.reportValidity();
               }
@@ -52,7 +52,7 @@ export const LinkEditBlock = forwardRef<HTMLDivElement, LinkEditorProps>(
 
     return (
       <div ref={formRef}>
-        <div className={cn('space-y-4', className)}>
+        <div className={cn("space-y-4", className)}>
           <div className="space-y-1">
             <Label>URL</Label>
             <Input
@@ -90,6 +90,6 @@ export const LinkEditBlock = forwardRef<HTMLDivElement, LinkEditorProps>(
   },
 );
 
-LinkEditBlock.displayName = 'LinkEditBlock';
+LinkEditBlock.displayName = "LinkEditBlock";
 
 export default LinkEditBlock;

@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 
-import { Redo2 } from 'lucide-react';
+import { Redo2 } from "lucide-react";
 
-import { useEditorContext } from '@/components/editor/partials/editor-provider';
+import { useEditorContext } from "@/components/editor/partials/editor-provider";
 
-import ToolbarButton, { ToolbarButtonProps } from '../partials/toolbar-button';
+import ToolbarButton, { ToolbarButtonProps } from "../partials/toolbar-button";
 
 const RedoToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   ({ className, onClick, children, ...props }, ref) => {
@@ -30,6 +30,6 @@ const RedoToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   },
 );
 
-RedoToolbar.displayName = 'RedoToolbar';
+RedoToolbar.displayName = "RedoToolbar";
 
 export { RedoToolbar };

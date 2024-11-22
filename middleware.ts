@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { fetcher } from "./app/api-fetcher";
 import { getSession } from "./lib/session/cookie";
-import { FetchApiServer } from "./lib/utils/fetch-api-server";
 
 const { APP_URL: baseUrl = "http://localhost:3002", SESSION_KEY = "session" } =
   process.env;
@@ -36,9 +36,7 @@ export default async function middleware(req: NextRequest) {
   }
 
   if (session) {
-    const api = new FetchApiServer();
-
-    const verifyResponse = await api.fetch({ url: "/v1/auth/verify" });
+    const verifyResponse = await fetcher("/v1/auth/verify");
 
     if (verifyResponse.code === 401) {
       nextResponse = NextResponse.redirect(

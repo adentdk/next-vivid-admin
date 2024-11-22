@@ -2,7 +2,10 @@
 
 import { createContext, useContext, useRef } from "react";
 
+import { useInterval } from "usehooks-ts";
 import { type StoreApi, useStore } from "zustand";
+
+import { getIdToken } from "@/lib/firebase/auth";
 
 import {
   createSessionStore,
@@ -22,35 +25,13 @@ export interface SessionStoreProviderProps {
 export const SessionStoreProvider = ({
   children,
   initialState,
+  refetchInterval = 60_000 * 5,
 }: SessionStoreProviderProps) => {
   const storeRef = useRef<StoreApi<SessionStoreType>>();
 
   if (!storeRef.current) {
     storeRef.current = createSessionStore(initialState);
   }
-
-  // useInterval(() => {
-  //   fetch("/api/session")
-  //     .then((res) => {
-  //       if (res.ok) {
-  //         return res.json();
-  //       }
-  //       throw new Error("Failed to fetch session data");
-  //     })
-  //     .then((data) => {
-  //       const decriptedData = Encryption.decrypt(
-  //         NEXT_PUBLIC_CLIENT_APP_SECRET,
-  //         data,
-  //       );
-  //       if (!decriptedData) {
-  //         throw new Error("Failed to fetch session data");
-  //       }
-  //       storeRef.current?.setState(decriptedData);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // }, refetchInterval);
 
   return (
     <SessionStoreContext.Provider value={storeRef.current}>

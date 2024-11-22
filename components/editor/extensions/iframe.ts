@@ -1,4 +1,4 @@
-import { Node } from '@tiptap/core';
+import { Node } from "@tiptap/core";
 
 export interface IframeOptions {
   allowFullscreen: boolean;
@@ -7,7 +7,7 @@ export interface IframeOptions {
   };
 }
 
-declare module '@tiptap/core' {
+declare module "@tiptap/core" {
   interface Commands<ReturnType> {
     iframe: {
       /**
@@ -19,9 +19,9 @@ declare module '@tiptap/core' {
 }
 
 export const Iframe = Node.create<IframeOptions>({
-  name: 'iframe',
+  name: "iframe",
 
-  group: 'block',
+  group: "block",
 
   atom: true,
 
@@ -29,7 +29,7 @@ export const Iframe = Node.create<IframeOptions>({
     return {
       allowFullscreen: true,
       HTMLAttributes: {
-        class: 'iframe-wrapper',
+        class: "iframe-wrapper",
       },
     };
   },
@@ -52,13 +52,13 @@ export const Iframe = Node.create<IframeOptions>({
   parseHTML() {
     return [
       {
-        tag: 'iframe',
+        tag: "iframe",
       },
     ];
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['div', this.options.HTMLAttributes, ['iframe', HTMLAttributes]];
+    return ["div", this.options.HTMLAttributes, ["iframe", HTMLAttributes]];
   },
 
   addCommands() {

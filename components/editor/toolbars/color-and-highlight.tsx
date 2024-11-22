@@ -6,7 +6,6 @@ import type { HighlightOptions } from "@tiptap/extension-highlight";
 import { Check, ChevronDown } from "lucide-react";
 
 import { useEditorContext } from "@/components/editor/partials/editor-provider";
-import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
@@ -14,7 +13,6 @@ import {
 } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils/classnames";
 
 import ToolbarButton from "../partials/toolbar-button";
 

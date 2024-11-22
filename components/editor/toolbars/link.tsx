@@ -1,16 +1,16 @@
-import { forwardRef, useCallback, useState } from 'react';
+import { forwardRef, useCallback, useState } from "react";
 
-import { Link2 } from 'lucide-react';
+import { Link2 } from "lucide-react";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
+} from "@/components/ui/popover";
 
-import { useEditorContext } from '../partials/editor-provider';
-import { LinkEditBlock } from '../partials/link-edit-block';
-import ToolbarButton, { ToolbarButtonProps } from '../partials/toolbar-button';
+import { useEditorContext } from "../partials/editor-provider";
+import { LinkEditBlock } from "../partials/link-edit-block";
+import ToolbarButton, { ToolbarButtonProps } from "../partials/toolbar-button";
 
 const LinkToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   ({ className, onClick, children, ...props }, ref) => {
@@ -18,23 +18,23 @@ const LinkToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
     const [open, setOpen] = useState(false);
 
     const { from, to } = editor.state.selection;
-    const text = editor.state.doc.textBetween(from, to, ' ');
+    const text = editor.state.doc.textBetween(from, to, " ");
 
     const onSetLink = useCallback(
       (url: string, text?: string, openInNewTab?: boolean) => {
         editor
           .chain()
           .focus()
-          .extendMarkRange('link')
+          .extendMarkRange("link")
           .insertContent({
-            type: 'text',
+            type: "text",
             text: text || url,
             marks: [
               {
-                type: 'link',
+                type: "link",
                 attrs: {
                   href: url,
-                  target: openInNewTab ? '_blank' : '',
+                  target: openInNewTab ? "_blank" : "",
                 },
               },
             ],
@@ -51,10 +51,10 @@ const LinkToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <ToolbarButton
-            isActive={editor.isActive('link')}
+            isActive={editor.isActive("link")}
             tooltip="Link"
             aria-label="Insert link"
-            disabled={editor.isActive('codeBlock')}
+            disabled={editor.isActive("codeBlock")}
             {...props}
           >
             <Link2 className="size-5" />

@@ -1,16 +1,16 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from "react";
 
-import { Copy, ExternalLink, Unlink2 } from 'lucide-react';
+import { Copy, ExternalLink, Unlink2 } from "lucide-react";
 
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
+} from "@/components/ui/tooltip";
 
-import ToolbarButton from './toolbar-button';
+import ToolbarButton from "./toolbar-button";
 
 interface LinkPopoverBlockProps {
   url: string;
@@ -23,7 +23,7 @@ export const LinkPopoverBlock: React.FC<LinkPopoverBlockProps> = ({
   onClear,
   onEdit,
 }) => {
-  const [copyTitle, setCopyTitle] = useState<string>('Copy');
+  const [copyTitle, setCopyTitle] = useState<string>("Copy");
 
   const handleCopy = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -31,8 +31,8 @@ export const LinkPopoverBlock: React.FC<LinkPopoverBlockProps> = ({
       navigator.clipboard
         .writeText(url)
         .then(() => {
-          setCopyTitle('Copied!');
-          setTimeout(() => setCopyTitle('Copy'), 1000);
+          setCopyTitle("Copied!");
+          setTimeout(() => setCopyTitle("Copy"), 1000);
         })
         .catch(console.error);
     },
@@ -40,7 +40,7 @@ export const LinkPopoverBlock: React.FC<LinkPopoverBlockProps> = ({
   );
 
   const handleOpenLink = useCallback(() => {
-    window.open(url, '_blank', 'noopener,noreferrer');
+    window.open(url, "_blank", "noopener,noreferrer");
   }, [url]);
 
   return (

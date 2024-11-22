@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { forwardRef, Fragment } from 'react';
+import { forwardRef, Fragment } from "react";
 
-import { Strikethrough } from 'lucide-react';
+import { Strikethrough } from "lucide-react";
 
-import { useEditorContext } from '@/components/editor/partials/editor-provider';
+import { useEditorContext } from "@/components/editor/partials/editor-provider";
 
-import ToolbarButton, { ToolbarButtonProps } from '../partials/toolbar-button';
+import ToolbarButton, { ToolbarButtonProps } from "../partials/toolbar-button";
 
 const StrikeThroughToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   ({ className, onClick, children, ...props }, ref) => {
@@ -20,7 +20,7 @@ const StrikeThroughToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
           </Fragment>
         }
         aria-label="Set strikethrough"
-        isActive={editor?.isActive('strike')}
+        isActive={editor?.isActive("strike")}
         onClick={(e) => {
           editor?.chain().focus().toggleStrike().run();
           onClick?.(e);
@@ -35,6 +35,6 @@ const StrikeThroughToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   },
 );
 
-StrikeThroughToolbar.displayName = 'StrikeThroughToolbar';
+StrikeThroughToolbar.displayName = "StrikeThroughToolbar";
 
 export { StrikeThroughToolbar };

@@ -42,7 +42,6 @@ export async function signInWithCustomToken(customToken: string) {
 
 export async function getIdToken() {
   const currentUser = auth.currentUser;
-
   if (!currentUser) throw new Error("NoUser");
   return _getIdToken(currentUser, true);
 }

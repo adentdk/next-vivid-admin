@@ -1,0 +1,12 @@
+div[cmdk-list-sizer] {
+  pointer-events: none !important;
+  z-index: 1 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+div[cmdk-list-sizer] > * {
+  pointer-events: auto !important;
+  z-index: 2 !important;
+  position: relative !important;
+}

@@ -57,7 +57,7 @@ export const columns: ColumnDef<PostCategoryType>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
-              <Link href={`/post-categories/${menu.id}/update`}>Update</Link>
+              <Link href={`/post-categories/${menu.id}/edit`}>Update</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
               <Link href={`/post-categories/${menu.id}/delete`}>Delete</Link>

@@ -1,9 +1,9 @@
-import { InferType, object, string } from "yup";
+import { array, InferType, object, string } from "yup";
 
 export const initPostSchema = object().shape({
   title: string().required(),
   locale: string().required(),
-  categoryId: string().required(),
+  categoryIds: array().of(string().required()).required().min(1),
 });
 
 export type InitPostSchemaType = InferType<typeof initPostSchema>;

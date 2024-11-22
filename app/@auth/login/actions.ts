@@ -3,21 +3,18 @@
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
+import { fetcher } from "@/app/api-fetcher";
 import { createSession } from "@/lib/session/cookie";
-import { FetchApiServer } from "@/lib/utils/fetch-api-server";
 
 export async function getCustomTokenAction(idToken: string) {
-  const api = new FetchApiServer();
-
-  const customTokenResult = await api.fetch<{
+  const customTokenResult = await fetcher<{
     customToken: string;
-  }>({
-    url: "/v1/auth/firebase-login",
+  }>("/v1/auth/firebase-login", {
     method: "POST",
     body: { idToken },
   });
 
-  return customTokenResult.toJson();
+  return customTokenResult;
 }
 
 export async function createSessionAction(idToken: string) {

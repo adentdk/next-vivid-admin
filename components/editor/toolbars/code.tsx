@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 
-import { Code2 } from 'lucide-react';
+import { Code2 } from "lucide-react";
 
-import { useEditorContext } from '@/components/editor/partials/editor-provider';
+import { useEditorContext } from "@/components/editor/partials/editor-provider";
 
-import ToolbarButton, { ToolbarButtonProps } from '../partials/toolbar-button';
+import ToolbarButton, { ToolbarButtonProps } from "../partials/toolbar-button";
 
 const CodeToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   ({ className, onClick, children, ...props }, ref) => {
@@ -15,7 +15,7 @@ const CodeToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
       <ToolbarButton
         tooltip="Code"
         aria-label="Insert code"
-        isActive={editor?.isActive('code')}
+        isActive={editor?.isActive("code")}
         onClick={(e) => {
           editor?.chain().focus().toggleCode().run();
           onClick?.(e);
@@ -30,6 +30,6 @@ const CodeToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   },
 );
 
-CodeToolbar.displayName = 'CodeToolbar';
+CodeToolbar.displayName = "CodeToolbar";
 
 export { CodeToolbar };

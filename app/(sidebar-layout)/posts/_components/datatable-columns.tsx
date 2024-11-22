@@ -68,7 +68,7 @@ export const columns: ColumnDef<PostManageType>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
-              <Link href={`/posts/${post.id}/update`}>Update</Link>
+              <Link href={`/posts/${post.id}/edit`}>Update</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild className="hover:cursor-pointer">
               <Link href={`/posts/${post.id}/delete`}>Delete</Link>

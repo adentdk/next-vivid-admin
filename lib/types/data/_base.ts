@@ -3,3 +3,9 @@ export interface BaseDataType {
   createTime: string;
   updateTime: string;
 }
+
+export interface MediaObjectType {
+  id: string;
+  path: string;
+  publicUrl: string | null;
+}

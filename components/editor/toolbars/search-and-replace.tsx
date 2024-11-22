@@ -1,38 +1,38 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { ArrowLeft, ArrowRight, Repeat, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Repeat, X } from "lucide-react";
 
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import type { SearchAndReplaceStorage } from '@/components/editor/extensions/search-and-replace';
-import { useEditorContext } from '@/components/editor/partials/editor-provider';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import type { SearchAndReplaceStorage } from "@/components/editor/extensions/search-and-replace";
+import { useEditorContext } from "@/components/editor/partials/editor-provider";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { Separator } from '@/components/ui/separator';
-import { cn } from '@/lib/utils/classnames';
+} from "@/components/ui/popover";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils/classnames";
 
-import ToolbarButton from '../partials/toolbar-button';
+import ToolbarButton from "../partials/toolbar-button";
 
 export function SearchAndReplaceToolbar() {
   const { editor } = useEditorContext();
 
   const [open, setOpen] = useState(false);
   const [replacing, setReplacing] = useState(false);
-  const [searchText, setSearchText] = useState('');
-  const [replaceText, setReplaceText] = useState('');
+  const [searchText, setSearchText] = useState("");
+  const [replaceText, setReplaceText] = useState("");
   const [checked, setChecked] = useState(false);
 
   const results = editor?.storage?.searchAndReplace
-    .results as SearchAndReplaceStorage['results'];
+    .results as SearchAndReplaceStorage["results"];
   const selectedResult = editor?.storage?.searchAndReplace
-    .selectedResult as SearchAndReplaceStorage['selectedResult'];
+    .selectedResult as SearchAndReplaceStorage["selectedResult"];
 
   const replace = () => editor?.chain().replace().run();
   const replaceAll = () => editor?.chain().replaceAll().run();
@@ -53,8 +53,8 @@ export function SearchAndReplaceToolbar() {
 
   useEffect(() => {
     if (!open) {
-      setReplaceText('');
-      setSearchText('');
+      setReplaceText("");
+      setSearchText("");
       setReplacing(false);
     }
   }, [open]);
@@ -67,7 +67,7 @@ export function SearchAndReplaceToolbar() {
           onClick={() => {
             setOpen(!open);
           }}
-          className={cn('h-8 w-max px-3 font-normal')}
+          className={cn("h-8 w-max px-3 font-normal")}
         >
           <Repeat className="mr-2 size-4" />
           <p>Search & Replace</p>
@@ -85,7 +85,7 @@ export function SearchAndReplaceToolbar() {
         className="relative flex w-[400px] px-3 py-2.5"
       >
         {!replacing ? (
-          <div className={cn('relative flex gap-1.5 items-center')}>
+          <div className={cn("relative flex gap-1.5 items-center")}>
             <Input
               value={searchText}
               className=" w-48"
@@ -137,7 +137,7 @@ export function SearchAndReplaceToolbar() {
             </Button>
           </div>
         ) : (
-          <div className={cn('relative w-full')}>
+          <div className={cn("relative w-full")}>
             <X
               onClick={() => {
                 setOpen(false);

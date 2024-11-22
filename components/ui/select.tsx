@@ -22,7 +22,7 @@ const SelectTrigger = forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+      "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
       className,
     )}
     {...props}
@@ -153,7 +153,7 @@ const SelectSeparator = forwardRef<
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 export type SelectMapItem =
   | { value: string; label: string }
-  | { value?: string; label: string; items: SelectMapItem[] };
+  | { value: string; label: string; items: SelectMapItem[] };
 
 export type SelectMapProps = React.ComponentProps<typeof Select> & {
   placeholder?: string;
@@ -161,44 +161,47 @@ export type SelectMapProps = React.ComponentProps<typeof Select> & {
   items: SelectMapItem[];
 };
 
-const SelectMap = forwardRef<HTMLDivElement, SelectMapProps>(
-  ({ items, placeholder, className, ...props }, ref) => {
-    const renderItems = (items: SelectMapItem[], depth: number = 1) => {
-      return items.map((item) =>
-        "items" in item ? (
-          <SelectGroup key={item.label}>
-            {typeof item.value === "string" ? (
-              <SelectItem
-                style={{ paddingLeft: `${16 + depth * 10}px` }}
-                value={item.value}
-              >
-                {item.label}
-              </SelectItem>
-            ) : (
-              <SelectLabel style={{ paddingLeft: `${16 + depth * 10}px` }}>
-                {item.label}
-              </SelectLabel>
-            )}
-            {renderItems(item.items, depth + 1)}{" "}
-          </SelectGroup>
-        ) : (
+export const renderSelectMapItems = (
+  items: SelectMapItem[],
+  depth: number = 1,
+) => {
+  return items.map((item) =>
+    "items" in item && item.items.length ? (
+      <SelectGroup key={item.label}>
+        {typeof item.value === "string" ? (
           <SelectItem
-            key={item.value}
-            value={item.value}
             style={{ paddingLeft: `${16 + depth * 10}px` }}
+            value={item.value}
           >
             {item.label}
           </SelectItem>
-        ),
-      );
-    };
+        ) : (
+          <SelectLabel style={{ paddingLeft: `${16 + depth * 10}px` }}>
+            {item.label}
+          </SelectLabel>
+        )}
+        {renderSelectMapItems(item.items, depth + 1)}{" "}
+      </SelectGroup>
+    ) : (
+      <SelectItem
+        key={item.value}
+        value={item.value}
+        style={{ paddingLeft: `${16 + depth * 10}px` }}
+      >
+        {item.label}
+      </SelectItem>
+    ),
+  );
+};
 
+const SelectMap = forwardRef<HTMLDivElement, SelectMapProps>(
+  ({ items, placeholder, className, ...props }, ref) => {
     return (
       <Select {...props}>
         <SelectTrigger className={className}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
-        <SelectContent>{renderItems(items)}</SelectContent>
+        <SelectContent>{renderSelectMapItems(items)}</SelectContent>
       </Select>
     );
   },

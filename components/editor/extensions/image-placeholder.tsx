@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import type { NodeViewProps } from '@tiptap/core';
+import type { NodeViewProps } from "@tiptap/core";
 import {
   type CommandProps,
   type Editor,
@@ -10,19 +10,19 @@ import {
   Node,
   NodeViewWrapper,
   ReactNodeViewRenderer,
-} from '@tiptap/react';
-import { LucideImage, LucideLink, Upload } from 'lucide-react';
+} from "@tiptap/react";
+import { LucideImage, LucideLink, Upload } from "lucide-react";
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn, isValidUrl } from '@/lib/utils/classnames';
-import { NODE_HANDLES_SELECTED_STYLE_CLASSNAME } from '@/lib/utils/classnames';
+} from "@/components/ui/popover";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn, isValidUrl } from "@/lib/utils/classnames";
+import { NODE_HANDLES_SELECTED_STYLE_CLASSNAME } from "@/lib/utils/classnames";
 
 export interface ImagePlaceholderOptions {
   HTMLAttributes: Record<string, any>;
@@ -34,7 +34,7 @@ export interface ImagePlaceholderOptions {
   maxSize?: number;
 }
 
-declare module '@tiptap/core' {
+declare module "@tiptap/core" {
   interface Commands<ReturnType> {
     imagePlaceholder: {
       /**
@@ -46,7 +46,7 @@ declare module '@tiptap/core' {
 }
 
 export const ImagePlaceholder = Node.create<ImagePlaceholderOptions>({
-  name: 'image-placeholder',
+  name: "image-placeholder",
 
   addOptions() {
     return {
@@ -57,14 +57,14 @@ export const ImagePlaceholder = Node.create<ImagePlaceholderOptions>({
     };
   },
 
-  group: 'block',
+  group: "block",
 
   parseHTML() {
     return [{ tag: `div[data-type="${this.name}"]` }];
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['div', mergeAttributes(HTMLAttributes)];
+    return ["div", mergeAttributes(HTMLAttributes)];
   },
 
   addNodeView() {
@@ -77,7 +77,7 @@ export const ImagePlaceholder = Node.create<ImagePlaceholderOptions>({
     return {
       insertImagePlaceholder: () => (props: CommandProps) => {
         return props.commands.insertContent({
-          type: 'image-placeholder',
+          type: "image-placeholder",
         });
       },
     };
@@ -88,7 +88,7 @@ export function ImagePlaceholderComponent(props: NodeViewProps) {
   const { editor, extension, selected } = props;
 
   const [open, setOpen] = useState(false);
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState("");
   const [urlError, setUrlError] = useState(false);
   const [isDragActive, setIsDragActive] = useState(false);
   const [isDragReject, setIsDragReject] = useState(false);
@@ -178,7 +178,7 @@ export function ImagePlaceholderComponent(props: NodeViewProps) {
       setUrlError(true);
       return;
     }
-    if (url !== '') {
+    if (url !== "") {
       editor.chain().focus().setImage({ src: url }).run();
       extension.options.onEmbed(url, editor);
     }
@@ -196,8 +196,8 @@ export function ImagePlaceholderComponent(props: NodeViewProps) {
         >
           <div
             className={cn(
-              'flex cursor-pointer items-center gap-3 rounded-md bg-accent p-2 py-3 text-sm text-accent-foreground transition-colors hover:bg-secondary',
-              selected && 'bg-primary/10 hover:bg-primary/20',
+              "flex cursor-pointer items-center gap-3 rounded-md bg-accent p-2 py-3 text-sm text-accent-foreground transition-colors hover:bg-secondary",
+              selected && "bg-primary/10 hover:bg-primary/20",
             )}
           >
             <LucideImage className="h-6 w-6" />
@@ -232,17 +232,17 @@ export function ImagePlaceholderComponent(props: NodeViewProps) {
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
                 className={cn(
-                  'my-2 rounded-md border border-dashed text-sm transition-colors',
-                  isDragActive && 'border-primary bg-secondary',
-                  isDragReject && 'border-destructive bg-destructive/10',
-                  'hover:bg-secondary',
+                  "my-2 rounded-md border border-dashed text-sm transition-colors",
+                  isDragActive && "border-primary bg-secondary",
+                  isDragReject && "border-destructive bg-destructive/10",
+                  "hover:bg-secondary",
                 )}
               >
                 <input
                   type="file"
                   accept={Object.keys(
                     extension.options.allowedMimeTypes || {},
-                  ).join(',')}
+                  ).join(",")}
                   multiple={extension.options.maxFiles !== 1}
                   onChange={handleFileInputChange}
                   className="hidden"

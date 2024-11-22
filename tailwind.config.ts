@@ -108,105 +108,78 @@ const config: Config = {
               "--tw-prose-td-borders": "hsl(var(--border))",
             },
             {
-              p: {
-                marginTop: em(10, 16),
-                marginBottom: em(10, 16),
-              },
+              p: { marginTop: em(10, 16), marginBottom: em(10, 16) },
               '[class~="lead"]': {
                 marginTop: em(12, 20),
                 marginBottom: em(12, 20),
               },
-              blockquote: {
-                marginTop: em(16, 20),
-                marginBottom: em(16, 20),
-              },
+              blockquote: { marginTop: em(16, 20), marginBottom: em(16, 20) },
               h1: {
+                // fontWeight: "bold",
                 marginBottom: em(16, 36),
               },
               h2: {
+                // fontWeight: "bold",
                 marginTop: em(24, 24),
                 marginBottom: em(12, 24),
               },
               h3: {
+                // fontWeight: "bold",
                 marginTop: em(16, 20),
                 marginBottom: em(6, 20),
               },
               h4: {
+                // fontWeight: "bold",
                 marginTop: em(12, 16),
                 marginBottom: em(4, 16),
               },
-              img: {
-                marginTop: em(16, 16),
-                marginBottom: em(16, 16),
-              },
-              picture: {
-                marginTop: em(16, 16),
-                marginBottom: em(16, 16),
-              },
-              video: {
-                marginTop: em(16, 16),
-                marginBottom: em(16, 16),
-              },
-              pre: {
-                marginTop: em(12, 14),
-                marginBottom: em(12, 14),
-              },
-              ol: {
-                marginTop: em(10, 16),
-                marginBottom: em(10, 16),
-              },
-              ul: {
-                marginTop: em(10, 16),
-                marginBottom: em(10, 16),
-              },
-              li: {
-                marginTop: em(4, 16),
-                marginBottom: em(4, 16),
-              },
-              "> ul > li p": {
-                marginTop: em(6, 16),
-                marginBottom: em(6, 16),
-              },
-              "> ul > li > p:first-child": {
-                marginTop: em(10, 16),
-              },
-              "> ul > li > p:last-child": {
-                marginBottom: em(10, 16),
-              },
-              "> ol > li > p:first-child": {
-                marginTop: em(10, 16),
-              },
-              "> ol > li > p:last-child": {
-                marginBottom: em(10, 16),
-              },
+              img: { marginTop: em(16, 16), marginBottom: em(16, 16) },
+              picture: { marginTop: em(16, 16), marginBottom: em(16, 16) },
+              video: { marginTop: em(16, 16), marginBottom: em(16, 16) },
+              pre: { marginTop: em(12, 14), marginBottom: em(12, 14) },
+              ol: { marginTop: em(10, 16), marginBottom: em(10, 16) },
+              ul: { marginTop: em(10, 16), marginBottom: em(10, 16) },
+              li: { marginTop: em(4, 16), marginBottom: em(4, 16) },
+              "> ul > li p": { marginTop: em(6, 16), marginBottom: em(6, 16) },
+              "> ul > li > p:first-child": { marginTop: em(10, 16) },
+              "> ul > li > p:last-child": { marginBottom: em(10, 16) },
+              "> ol > li > p:first-child": { marginTop: em(10, 16) },
+              "> ol > li > p:last-child": { marginBottom: em(10, 16) },
               "ul ul, ul ol, ol ul, ol ol": {
                 marginTop: em(6, 16),
                 marginBottom: em(6, 16),
               },
-              dl: {
-                marginTop: em(10, 16),
-                marginBottom: em(10, 16),
-              },
-              dt: {
-                marginTop: em(10, 16),
-              },
-              dd: {
-                marginTop: em(4, 16),
-              },
-              hr: {
-                marginTop: em(24, 16),
-                marginBottom: em(24, 16),
-              },
-              figure: {
-                marginTop: em(16, 16),
-                marginBottom: em(16, 16),
-              },
-              figcaption: {
-                marginTop: em(6, 14),
-              },
+              dl: { marginTop: em(10, 16), marginBottom: em(10, 16) },
+              dt: { marginTop: em(10, 16) },
+              dd: { marginTop: em(4, 16) },
+              hr: { marginTop: em(24, 16), marginBottom: em(24, 16) },
+              figure: { marginTop: em(16, 16), marginBottom: em(16, 16) },
+              figcaption: { marginTop: em(6, 14) },
             },
           ],
         },
+      },
+      keyframes: {
+        "accordion-down": {
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
+        },
+        "accordion-up": {
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },

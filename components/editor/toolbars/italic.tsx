@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 
-import { ItalicIcon } from 'lucide-react';
+import { ItalicIcon } from "lucide-react";
 
-import { useEditorContext } from '@/components/editor/partials/editor-provider';
+import { useEditorContext } from "@/components/editor/partials/editor-provider";
 
-import ToolbarButton, { ToolbarButtonProps } from '../partials/toolbar-button';
+import ToolbarButton, { ToolbarButtonProps } from "../partials/toolbar-button";
 
 const ItalicToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   ({ className, onClick, children, ...props }, ref) => {
@@ -15,7 +15,7 @@ const ItalicToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
       <ToolbarButton
         tooltip="Italic"
         aria-label="Set italic"
-        isActive={editor?.isActive('italic')}
+        isActive={editor?.isActive("italic")}
         onClick={(e) => {
           editor?.chain().focus().toggleItalic().run();
           onClick?.(e);
@@ -30,6 +30,6 @@ const ItalicToolbar = forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   },
 );
 
-ItalicToolbar.displayName = 'ItalicToolbar';
+ItalicToolbar.displayName = "ItalicToolbar";
 
 export { ItalicToolbar };
